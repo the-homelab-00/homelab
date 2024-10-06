@@ -1,14 +1,6 @@
 .POSIX:
 
 env ?= prod
-export KUBECONFIG = $(shell pwd)/kubeconfig.yaml
-
-ifeq ($(env), stag)
-    domain := 127-0-0-1.nip.io
-else ifeq ($(env), prod)
-    domain := thepotato.uk
-endif
-export domain
 
 default: k3d
 
