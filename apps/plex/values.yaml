@@ -57,42 +57,42 @@ app-template:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
       hosts:
-      - host: &jellyfinHost jellyfin.thepotato.uk
+      - host: &jellyfinHost jellyfin.{{ requiredEnv "DOMAIN }} 
         paths:
         - path: /
           pathType: Prefix
           service:
             name: main
             port: http
-      - host: &transmissionHost transmission.thepotato.uk
+      - host: &transmissionHost transmission.{{ requiredEnv "DOMAIN }} 
         paths:
         - path: /
           pathType: Prefix
           service:
             name: main
             port: transmission
-      - host: &prowlarrHost prowlarr.thepotato.uk
+      - host: &prowlarrHost prowlarr.{{ requiredEnv "DOMAIN }} 
         paths:
         - path: /
           pathType: Prefix
           service:
             name: main
             port: prowlarr
-      - host: &radarrHost radarr.thepotato.uk
+      - host: &radarrHost radarr.{{ requiredEnv "DOMAIN }} 
         paths:
         - path: /
           pathType: Prefix
           service:
             name: main
             port: radarr
-      - host: &sonarrHost sonarr.thepotato.uk
+      - host: &sonarrHost sonarr.{{ requiredEnv "DOMAIN }} 
         paths:
         - path: /
           pathType: Prefix
           service:
             name: main
             port: sonarr
-      - host: &jellyseerrHost jellyseerr.thepotato.uk
+      - host: &jellyseerrHost jellyseerr.{{ requiredEnv "DOMAIN }} 
         paths:
         - path: /
           pathType: Prefix

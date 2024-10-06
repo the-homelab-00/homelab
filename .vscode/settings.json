@@ -1,10 +1,27 @@
 {
     "yaml.schemaStore.enable": false,
     "cSpell.words": [
+        "fallenbagel",
+        "gethomepage",
+        "homelab",
+        "jellyfin",
+        "jellyseerr",
+        "kubeconfig",
+        "letsencrypt",
+        "lscr",
+        "mkdocs",
+        "nixos",
         "pihole",
+        "prowlarr",
+        "radarr",
+        "servicelb",
+        "servicemonitor",
         "slens",
+        "sonarr",
+        "thepotato",
         "traefik",
-        "websecure"
+        "websecure",
+        "workdir"
     ],
     "yaml.schemas": {
         "https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.0/charts/other/app-template/values.schema.json": "file:///c%3A/Users/potato/Documents/k3s/helm/pi-hole.yaml"
