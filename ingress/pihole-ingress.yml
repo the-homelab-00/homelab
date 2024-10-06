@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pihole-ingress
+  namespace: default
+  uid: c05745b8-c353-4021-a1f4-5d86939cfeba
+  resourceVersion: "1981"
+  generation: 3
+  creationTimestamp: 2024-10-05T23:14:32Z
+  labels:
+    k8slens-edit-resource-version: v1
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: >
+      {"apiVersion":"networking.k8s.io/v1","kind":"Ingress","metadata":{"annotations":{"kubernetes.io/ingress.class":"traefik","traefik.ingress.kubernetes.io/router.entrypoints":"web, websecure"},"name":"pihole-ingress","namespace":"default"},"spec":{"rules":[{"host":"pihole.thepotato.com","http":{"paths":[{"backend":{"service":{"name":"pihole-web","port":{"number":80}}},"path":"/","pathType":"Prefix"}]}}]}}
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+  selfLink: /apis/networking.k8s.io/v1/namespaces/default/ingresses/pihole-ingress
+status:
+  loadBalancer:
+    ingress:
+    - ip: 192.168.12.10
+spec:
+  rules:
+  - host: pihole.thepotato.uk
+    http:
+      paths:
+      - path: /admin
+        pathType: Prefix
+        backend:
+          service:
+            name: pihole-web
+            port:
+              number: 80
