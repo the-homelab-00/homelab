@@ -1,5 +1,5 @@
 data "cloudflare_zone" "zone" {
-  name = getenv("DOMAIN")
+  name = var.domain
 }
 
 data "cloudflare_api_token_permission_groups" "all" {}

@@ -5,7 +5,7 @@
 KUBECONFIG = $(shell pwd)/metal/kubeconfig.yaml
 KUBE_CONFIG_PATH = $(KUBECONFIG)
 
-export KUBECONFIG = $(shell pwd)/kubeconfig.yaml
+
 
 ifeq ($(env), stag)
     domain := 127-0-0-1.nip.io
