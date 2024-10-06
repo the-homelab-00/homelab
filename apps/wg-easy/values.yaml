@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.2.0/charts/other/app-template/values.schema.json
+
+app-template:
+  controllers:
+    wireguard:
+      containers:
+        app:
+          image:
+            repository: ghcr.io/wg-easy/wg-easy
+            tag: latest
+          env:
+            WG_HOST: wireguard.thepotato.uk
+            WG_DEFAULT_DNS: 1.1.1.1
+          securityContext:
+            capabilities:
+              add:
+              - NET_ADMIN
+              - SYS_MODULE
+  service:
+    wireguard:
+      controller: wireguard
+      type: LoadBalancer
+      ports:
+        wireguard-udp:
+          port: 51820
+          protocol: UDP
+        wireguard-ui:
+          port: 51821
+          protocol: TCP
+  ingress:
+    main:
+      enabled: true
+      className: nginx
+      annotations:
+      hosts:
+      - host: &host wireguard.thepotato.uk
+        paths:
+        - path: /
+          pathType: Prefix
+          service:
+            name: wireguard
+            port: wireguard-ui
+      tls:
+      - hosts:
+        - *host
+        secretName: wireguard-tls-certificate
+
+  persistence:
+    data:
+      accessMode: ReadWriteOnce
+      size: 10Mi
+      globalMounts:
+      - path: /etc/wireguard
+        readonly: false
