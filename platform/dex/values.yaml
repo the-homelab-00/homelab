@@ -1,6 +1,6 @@
 dex:
   config:
-    issuer: https://dex.thepotato.uk
+    issuer: https://dex.127-0-0-1.nip.io
     storage:
       type: kubernetes
       config:
@@ -27,7 +27,7 @@ dex:
       - id: grafana-sso
         name: Grafana
         redirectURIs:
-          - 'https://grafana.thepotato.uk/login/generic_oauth'
+          - 'https://grafana.127-0-0-1.nip.io/login/generic_oauth'
         secretEnv: GRAFANA_SSO_CLIENT_SECRET
       - id: gitea
         name: Gitea
@@ -43,7 +43,7 @@ dex:
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-prod
     hosts:
-      - host: &host dex.thepotato.uk
+      - host: &host dex.127-0-0-1.nip.io
         paths:
           - path: /
             pathType: ImplementationSpecific
