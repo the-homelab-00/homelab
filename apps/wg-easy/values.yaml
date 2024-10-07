@@ -9,7 +9,7 @@ app-template:
             repository: ghcr.io/wg-easy/wg-easy
             tag: latest
           env:
-            WG_HOST: wireguard.{{ requiredEnv "DOMAIN" }}   
+            WG_HOST: wireguard.thepotato.uk  
             WG_DEFAULT_DNS: 1.1.1.1
           securityContext:
             capabilities:

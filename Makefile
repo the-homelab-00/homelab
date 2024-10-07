@@ -5,18 +5,7 @@
 KUBECONFIG = $(shell pwd)/metal/kubeconfig.yaml
 KUBE_CONFIG_PATH = $(KUBECONFIG)
 
-
-
-ifeq ($(env), stag)
-    domain := 127-0-0-1.nip.io
-else ifeq ($(env), prod)
-    domain := thepotato.uk
-endif
-export domain
-export TF_VAR_domain = $(domain)
-
-
-default: metal system external clean
+default: metal system external smoke-test post-install clean
 
 configure:
 	./scripts/configure
@@ -58,6 +47,7 @@ test:
 
 clean:
 	docker compose --project-directory ./metal/roles/pxe_server/files down
+	k3d cluster delete homelab-dev
 
 docs:
 	mkdocs serve
