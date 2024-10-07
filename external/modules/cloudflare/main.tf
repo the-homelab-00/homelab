@@ -1,5 +1,5 @@
 data "cloudflare_zone" "zone" {
-  name = var.domain
+  name = "thepotato.uk"
 }
 
 data "cloudflare_api_token_permission_groups" "all" {}
