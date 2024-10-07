@@ -13,10 +13,10 @@ else ifeq ($(env), prod)
     domain := thepotato.uk
 endif
 export domain
-export TF_VAR_domain := $(domain)
+export TF_VAR_domain = $(domain)
 
 
-default: metal system external smoke-test post-install clean
+default: metal system external clean
 
 configure:
 	./scripts/configure
