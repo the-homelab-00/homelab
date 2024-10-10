@@ -1,0 +1,3 @@
+---
+providerRegex: ^(home-lab-1)$
+bypassDnsResolution: true
