@@ -131,7 +131,7 @@ spec:
 
         conditional:
           mapping:
-            ${SECRET_DOMAIN}: udp:10.0.0.67
+            ${SECRET_DOMAIN}: udp:10.0.0.61
 
 
         # customDNS:
