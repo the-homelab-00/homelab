@@ -18,3 +18,4 @@ resources:
   - ./external-secrets.yaml
   - ./intel.yaml
   - ./grafana.yaml
+  - ./emqx.yaml
