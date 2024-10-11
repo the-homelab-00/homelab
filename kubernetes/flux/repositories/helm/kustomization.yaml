@@ -19,3 +19,4 @@ resources:
   - ./intel.yaml
   - ./grafana.yaml
   - ./piraeus.yaml
+  - ./emqx.yaml
