@@ -11,9 +11,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  dependsOn:
-    - name: external-dns
-  path: ./resources
+  path: ./kubernetes/apps/network/blocky/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -21,3 +19,4 @@ spec:
   wait: false
   interval: 30m
   timeout: 5m
+
