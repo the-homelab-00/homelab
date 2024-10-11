@@ -110,7 +110,7 @@ spec:
                 service:
                   identifier: app
                   port: http
-    config: |
+    config: |-
         ---
         ports:
           dns: 0.0.0.0:53
@@ -130,8 +130,9 @@ spec:
           upstream: &router 10.0.0.1
 
         conditional:
+          fallbackUpstream: true
           mapping:
-            ${SECRET_DOMAIN}: udp:10.0.0.10
+            "${SECRET_DOMAIN}": udp:10.0.0.61
 
 
         # customDNS:
