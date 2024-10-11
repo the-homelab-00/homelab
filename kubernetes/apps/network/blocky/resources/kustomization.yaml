@@ -1,0 +1,12 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - config.yml  # This should just refer to your file, no path prefix
+
+configMapGenerator:
+  - name: blocky-configmap
+    files:
+      - config.yml  # This refers directly to your config.yml file in the same directory
