@@ -10,7 +10,6 @@ spec:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: external-dns
-  path: ./resources
   prune: true
   sourceRef:
     kind: GitRepository
