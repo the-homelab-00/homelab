@@ -6,6 +6,8 @@ on:
   pull_request:
     branches: ["main"]
     paths: ["kubernetes/**"]
+  push:
+    branches: ["main"]
 
 env:
   KUBERNETES_DIR: ./kubernetes
