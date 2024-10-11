@@ -1,18 +1,17 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+# yaml-language-server: $schema=https://github.com/fluxcd-community/flux2-schemas/raw/main/kustomization-kustomize-v1.json
+
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app grafana
+  name: &app blocky
   namespace: flux-system
 spec:
-  targetNamespace: observability
+  targetNamespace: network
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  dependsOn:
-    - name: external-secrets-stores
-  path: ./kubernetes//apps/observability/grafana/app
+  path: ./kubernetes/apps/network/blocky/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -20,3 +19,4 @@ spec:
   wait: false
   interval: 30m
   timeout: 5m
+

@@ -18,4 +18,6 @@ resources:
   - ./external-secrets.yaml
   - ./intel.yaml
   - ./grafana.yaml
+  - ./piraeus.yaml
   - ./emqx.yaml
+  - ./backube.yaml
