@@ -26,6 +26,7 @@ spec:
     controller:
       service:
         annotations:
+          external-dns.alpha.kubernetes.io/hostname: "internal.${SECRET_DOMAIN}"
           lbipam.cilium.io/ips: "10.0.0.61"
         externalTrafficPolicy: Cluster
       ingressClassResource:
@@ -65,6 +66,16 @@ spec:
             any: true
       extraArgs:
         default-ssl-certificate: "network/${SECRET_DOMAIN/./-}-production-tls"
+      terminationGracePeriodSeconds: 120
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: ingress-nginx
+              app.kubernetes.io/instance: nginx-internal
+              app.kubernetes.io/component: controller
       resources:
         requests:
           cpu: 100m
