@@ -17,6 +17,8 @@ tasks:
             if sops filestatus "$file" | jq --exit-status ".encrypted == false" > /dev/null; then
               sops --encrypt --in-place "$file"
               echo "Encrypted $file"
+            else
+              echo "$file is already encrypted"
             fi
           done
     preconditions:
