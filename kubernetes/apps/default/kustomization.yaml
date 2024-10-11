@@ -8,3 +8,4 @@ resources:
   # Flux-Kustomizations
   - ./frigate/ks.yaml
   - ./slskd/ks.yaml
+  - ./minio/ks.yaml
