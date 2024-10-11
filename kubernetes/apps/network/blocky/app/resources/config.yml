@@ -16,6 +16,9 @@ upstreams:
 clientLookup:
   upstream: &router 10.0.0.1
 
+conditional:
+  mapping:
+    ${SECRET_DOMAIN}: udp:${GATEWAY_ADDR}
 
 
 # customDNS:
