@@ -18,7 +18,7 @@ clientLookup:
 
 conditional:
   mapping:
-    ${SECRET_DOMAIN}: udp:${GATEWAY_ADDR}
+    thepotato.uk: udp:10.0.0.61
 
 
 # customDNS:
