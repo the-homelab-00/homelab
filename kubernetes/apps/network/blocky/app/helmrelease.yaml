@@ -123,9 +123,6 @@ spec:
         externalResolvers:
         - tcp-tls:${SECRET_NEXTDNS_ID}.dns1.nextdns.io:853
         - tcp-tls:${SECRET_NEXTDNS_ID}.dns2.nextdns.io:853
-      conditional:
-        mapping:
-          ${SECRET_DOMAIN}: udp:10.0.0.1
       blocking:
         blackLists:
           ads:
