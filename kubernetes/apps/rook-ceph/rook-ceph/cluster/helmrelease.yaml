@@ -64,20 +64,14 @@ spec:
         connections:
           requireMsgr2: true
       storage:
-        useAllNodes: true
-        useAllDevices: true
-        deviceFilter: sdc
+        useAllNodes: false
+        useAllDevices: false
         config:
           osdsPerDevice: "1"
-      placement:
-        mgr: &placement
-          nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-                - matchExpressions:
-                    - key: node-role.kubernetes.io/control-plane
-                      operator: Exists
-        mon: *placement
+        nodes:
+          - name: "delta"
+            devices:
+              - name: "/dev/disk/by-id/wwn-0x5000c50032b9a931"
       resources:
         mgr:
           requests:
