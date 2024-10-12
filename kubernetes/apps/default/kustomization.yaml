@@ -7,5 +7,5 @@ resources:
   - ./namespace.yaml
   # Flux-Kustomizations
   - ./frigate/ks.yaml
-  - ./slskd/ks.yaml
+  # - ./slskd/ks.yaml
   - ./minio/ks.yaml
