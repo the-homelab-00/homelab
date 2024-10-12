@@ -41,7 +41,7 @@ spec:
           name: "rook.${SECRET_DOMAIN}"
           path: /
     toolbox:
-      enabled: true
+      enabled: false
     configOverride: |
       [global]
       bdev_enable_discard = true
