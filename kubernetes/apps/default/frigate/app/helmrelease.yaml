@@ -102,8 +102,8 @@ spec:
     persistence:
       config:
         existingClaim: frigate
-        globalMounts:
-          - path: /data
+        # globalMounts:
+        #   - path: /data
       config-file:
         type: configMap
         name: frigate-configmap
