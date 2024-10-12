@@ -14,11 +14,13 @@ upstreams:
       - tcp-tls:1.0.0.1:853
 
 clientLookup:
-  upstream: &router 10.0.0.1
+  upstream: 10.0.0.1
 
 conditional:
+  fallbackUpstream: true
   mapping:
-    thepotato.uk: udp:10.0.0.61
+    #gateway vip
+    thepotato.uk: 10.0.0.62
 
 
 # customDNS:
