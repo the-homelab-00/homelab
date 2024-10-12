@@ -21,3 +21,4 @@ resources:
   - ./piraeus.yaml
   - ./emqx.yaml
   - ./backube.yaml
+  - ./rook-ceph.yaml
