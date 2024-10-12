@@ -100,10 +100,10 @@ spec:
                   identifier: app
                   port: http
     persistence:
-      config:
-        existingClaim: frigate
-        # globalMounts:
-        #   - path: /data
+      # config:
+      #   existingClaim: frigate
+      #   globalMounts:
+      #     - path: /data
       config-file:
         type: configMap
         name: frigate-configmap
