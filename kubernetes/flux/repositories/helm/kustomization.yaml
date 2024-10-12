@@ -22,3 +22,4 @@ resources:
   - ./emqx.yaml
   - ./backube.yaml
   - ./rook-ceph.yaml
+  - ./node-feature-discovery.yaml
