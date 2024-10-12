@@ -69,7 +69,7 @@ spec:
         config:
           osdsPerDevice: "1"
         nodes:
-          - name: "delta"
+          - name: "home-lab-1"
             devices:
               - name: "/dev/disk/by-id/wwn-0x5000c50032b9a931"
       resources:

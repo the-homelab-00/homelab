@@ -114,8 +114,11 @@ spec:
                   port: s3
     persistence:
       config:
-        type: nfs
-        server: expanse.internal
-        path: /eros/Minio
+        type: emptyDir
         globalMounts:
           - path: /data
+        # type: nfs
+        # server: expanse.internal
+        # path: /eros/Minio
+        # globalMounts:
+        #   - path: /data

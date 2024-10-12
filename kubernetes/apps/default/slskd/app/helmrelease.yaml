@@ -125,8 +125,11 @@ spec:
       tmp:
         type: emptyDir
       media:
-        type: nfs
-        server: expanse.internal
-        path: /eros/Soulseek
+        type: emptyDir
         globalMounts:
           - path: /media
+        # type: nfs
+        # server: expanse.internal
+        # path: /eros/Soulseek
+        # globalMounts:
+        #   - path: /media

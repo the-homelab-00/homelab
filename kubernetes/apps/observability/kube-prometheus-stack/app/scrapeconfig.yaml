@@ -6,9 +6,9 @@ metadata:
   name: &name node-exporter
 spec:
   staticConfigs:
-    - targets:
-        - expanse.internal:9100
-        - pikvm.internal:9100
+    - targets: []
+        #  - expanse.internal:9100
+        # - pikvm.internal:9100
         # - voyager.internal:9100
   metricsPath: /metrics
   relabelings:
@@ -23,8 +23,8 @@ metadata:
   name: &name pikvm
 spec:
   staticConfigs:
-    - targets:
-        - pikvm.internal
+    - targets: []
+        # - pikvm.internal
   metricsPath: /api/export/prometheus/metrics
   relabelings:
     - action: replace
