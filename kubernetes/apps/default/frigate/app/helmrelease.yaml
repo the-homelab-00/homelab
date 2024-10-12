@@ -117,10 +117,10 @@ spec:
         sizeLimit: 4Gi
         globalMounts:
           - path: /dev/shm
-      media:
-        type: emptyDir
-        globalMounts:
-          - path: /media
+      # media:
+      #   type: emptyDir
+      #   globalMounts:
+      #     - path: /media
         # type: nfs
         # server: expanse.internal
         # path: /eros/Frigate
