@@ -1,11 +1,65 @@
+
+ffmpeg:
+  hwaccel_args: preset-vaapi
+  output_args:
+    record: preset-record-generic-audio-aac
+
+# detectors:
+#   ov:
+#     type: openvino
+#     device: GPU
+
+# model:
+#   width: 300
+#   height: 300
+#   input_tensor: nhwc
+#   input_pixel_format: bgr
+#   path: /openvino-model/ssdlite_mobilenet_v2.xml
+#   labelmap_path: /openvino-model/coco_91cl_bkgr.txt
+
 mqtt:
-  enabled: False
+  user: "{FRIGATE_MQTT_USER}"
+  password: "{FRIGATE_MQTT_PASSWORD}"
+
+
+go2rtc:
+  streams:
+    reolink_doorbell_front_door:
+      - ffmpeg:http://10.0.0.2//flv?port=1935&app=bcs&stream=channel0_main.bcs&user=admin&password={REOLINK_USERNAME}@E#video=copy#audio=copy#audio=opus
+      - rtsp://10.0.0.2//Preview_01_sub
+    reolink_doorbell_front_door_sub:
+      - ffmpeg:https://10.0.0.2//flv?port=1935&app=bcs&stream=channel0_ext.bcs&user={REOLINK_USERNAME}&password={REOLINK_PASSWORD}
+
+objects:
+  track:
+    - person
+    - cat
+    - dog
+
+
+record:
+  enabled: true
+  retain:
+    days: 3
+    mode: motion
+  events:
+    retain:
+      default: 14
+      mode: active_objects
 
 cameras:
-  dummy_camera: # <--- this will be changed to your actual camera later
-    enabled: False
+  reolink_doorbell_front_door: # <--- this will be changed to your actual camera later
     ffmpeg:
       inputs:
-        - path: rtsp://127.0.0.1:554/rtsp
+        - path: rtsp://127.0.0.1:8554/reolink_doorbell_front_door
+          input_args: preset-rtsp-restream
+          roles:
+            - record
+        - path: rtsp://127.0.0.1:8554/reolink_doorbell_front_door_sub
+          input_args: preset-rtsp-restream
           roles:
             - detect
+    motion:
+      mask: 0.243,0.01,0.732,0.002,0.727,0.067,0.237,0.067
+version: 0.14
+sion: 0.15-0
