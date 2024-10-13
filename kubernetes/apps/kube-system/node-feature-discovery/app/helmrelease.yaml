@@ -29,8 +29,5 @@ spec:
       config:
         core:
           sources: ["pci", "system", "usb"]
-      resources:
-        requests:
-          memory: "800mi"
     prometheus:
       enable: true
