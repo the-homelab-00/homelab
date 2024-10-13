@@ -31,6 +31,6 @@ spec:
           sources: ["pci", "system", "usb"]
       resources:
         requests:
-          memory: "200mi"
+          memory: "800mi"
     prometheus:
       enable: true
