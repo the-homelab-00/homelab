@@ -6,7 +6,7 @@ ffmpeg:
 
 # detectors:
 #   ov:
-#     type: openvino
+#     type:
 #     device: GPU
 
 # model:
@@ -18,6 +18,8 @@ ffmpeg:
 #   labelmap_path: /openvino-model/coco_91cl_bkgr.txt
 
 mqtt:
+  host: emqx-listeners.database.svc.cluster.local
+  topic_prefix: frigate
   user: "{FRIGATE_MQTT_USERNAME}"
   password: "{FRIGATE_MQTT_PASSWORD}"
 
