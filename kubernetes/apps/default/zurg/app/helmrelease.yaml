@@ -27,13 +27,13 @@ spec:
       zurg:
         annotations:
           reloader.stakater.com/auto: "true"
+        imagePullSecrets:
+          name: github-pat
         containers:
           app:
             image:
               repository: ghcr.io/debridmediamanager/zurg
               tag: 2024.10.14-nightly
-              imagePullSecrets:
-                name: github-pat
             env:
               TZ: Europe/London
             envFrom:
