@@ -42,9 +42,6 @@ spec:
             env:
               TZ: Europe/London
               LIBVA_DRIVER_NAME: i965
-            envFrom:
-              - secretRef:
-                  name: frigate-secret
             probes:
               liveness: &probes
                 enabled: true
