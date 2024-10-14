@@ -106,12 +106,13 @@ spec:
       #   globalMounts:
       #     - path: /data
       config-file:
-        type: configMap
-        name: frigate-configmap
-        globalMounts:
-          - path: /config/config.yml
-            subPath: config.yml
-            readOnly: true
+        type: secret
+        name: frigate-secret
+        advancedMounts:
+          frigate:
+            app:
+              - path: /config/config.yml
+                subPath: config.yml
       cache:
         type: emptyDir
         medium: Memory
