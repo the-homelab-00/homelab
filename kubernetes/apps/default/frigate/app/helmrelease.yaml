@@ -98,20 +98,13 @@ spec:
                   identifier: app
                   port: http
     persistence:
-      config:
-        existingClaim: frigate-config
-        advancedMounts:
-          frigate:
-            app:
-              - path: /config
       config-file:
-        type: secret
-        name: frigate-secret
-        advancedMounts:
-          frigate:
-            app:
-              - path: /config/config.yml
-                subPath: config.yml
+        type: configMap
+        name: frigate-configmap
+        globalMounts:
+          - path: /config/config.yml
+            subPath: config.yml
+            readOnly: true
       cache:
         type: emptyDir
         medium: Memory
