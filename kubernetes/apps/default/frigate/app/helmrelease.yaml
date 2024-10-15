@@ -108,10 +108,16 @@ spec:
           - path: /config/config.yml
             subPath: config.yml
             readOnly: false
+      data:
+        existingClaim: frigate-media
+        advancedMounts:
+          frigate:
+            app:
+              - path: /media/frigate
       cache:
         type: emptyDir
         medium: Memory
-        sizeLimit: 4Gi
+        sizeLimit: 1Gi
         globalMounts:
           - path: /dev/shm
       # media:
