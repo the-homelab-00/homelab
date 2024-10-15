@@ -64,8 +64,8 @@ spec:
         connections:
           requireMsgr2: true
       storage:
-        useAllNodes: false
-        useAllDevices: false
+        useAllNodes: true
+        useAllDevices: true
         config:
           osdsPerDevice: "1"
         nodes:
