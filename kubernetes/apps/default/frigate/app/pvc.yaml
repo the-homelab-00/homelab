@@ -4,7 +4,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: frigate-media
 spec:
-  accessModes: ["ReadWriteOnce"]
+  accessModes: ["ReadWriteMany"]
   resources:
     requests:
       storage: 20Gi
