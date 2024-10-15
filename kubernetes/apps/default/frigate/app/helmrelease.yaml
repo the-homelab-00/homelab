@@ -98,10 +98,12 @@ spec:
                   identifier: app
                   port: http
     persistence:
-      # config:
-      #   existingClaim: frigate
-      #   globalMounts:
-      #     - path: /data
+      config:
+        existingClaim: frigate-config
+        advancedMounts:
+          frigate:
+            app:
+              - path: /config
       config-file:
         type: secret
         name: frigate-secret
