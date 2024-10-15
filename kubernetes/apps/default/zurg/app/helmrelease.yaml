@@ -58,7 +58,10 @@ spec:
                 memory: 1Gi
     defaultPodOptions:
         imagePullSecrets:
-          - name: ghcr-secret
+          valueFrom:
+            secretKeyRef:
+              name: zurg-secret
+              key: GITHUB_PAT
     service:
       app:
         controller: zurg
