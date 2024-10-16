@@ -60,7 +60,7 @@ spec:
         imagePullSecrets:
           - valueFrom:
               secretKeyRef:
-                name: zurg-secret
+                name: zurg-secret-ghcr
                 key: GITHUB_PAT
     service:
       app:
