@@ -101,6 +101,12 @@ spec:
                   identifier: app
                   port: http
     persistence:
+      config:
+        existingClaim: frigate-config
+        advancedMounts:
+          frigate:
+            app:
+              - path: /config
       config-file:
         type: configMap
         name: frigate-configmap

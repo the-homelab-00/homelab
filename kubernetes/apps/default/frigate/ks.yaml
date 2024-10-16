@@ -26,4 +26,5 @@ spec:
   postBuild:
     substitute:
       APP: *app
+      VOLSYNC_CLAIM: frigate-config
       VOLSYNC_CAPACITY: 5Gi
