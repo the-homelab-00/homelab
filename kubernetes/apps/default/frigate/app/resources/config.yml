@@ -53,7 +53,6 @@ cameras:
             - record
         - path: rtsp://127.0.0.1:8554/reolink_doorbell_front_door_sub
           input_args: preset-rtsp-restream
-          roles:
 
     motion:
       mask: 0.243,0.01,0.732,0.002,0.727,0.067,0.237,0.067
