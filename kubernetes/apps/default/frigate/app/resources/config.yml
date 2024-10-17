@@ -2,10 +2,12 @@ ffmpeg:
   hwaccel_args: preset-vaapi
   output_args:
     record: preset-record-generic-audio-copy
-# detectors:
-#   ov:
-#     type:
-#     device: GPU
+
+detectors:
+  coral:
+    type: edgetpu
+    device: usb
+
 # model:
 #   width: 300
 #   height: 300
