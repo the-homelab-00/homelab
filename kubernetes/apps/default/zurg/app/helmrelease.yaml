@@ -86,9 +86,11 @@ spec:
       config-file:
         type: secret
         name: zurg-secret
-        globalMounts:
-          - path: /config/config.yml
-            subPath: config.yml
+        advancedMounts:
+          zurg:
+            app:
+              - path: /app/config.yml
+                subPath: config.yml
 
       # media:
       #   type: emptyDir
