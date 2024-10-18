@@ -23,6 +23,8 @@ spec:
       strategy: rollback
       retries: 3
   values:
+    spdk:
+      enabled: true
     csi:
       attacherReplicaCount: &replicas 1
       provisionerReplicaCount: *replicas
