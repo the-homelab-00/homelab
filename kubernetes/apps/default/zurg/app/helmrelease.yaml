@@ -65,7 +65,7 @@ spec:
         controller: zurg
         ports:
           http:
-            port: *port
+            port: 9999
     ingress:
       app:
         annotations:
