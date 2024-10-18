@@ -56,12 +56,13 @@ spec:
                 cpu: 10m
               limits:
                 memory: 1Gi
+
     defaultPodOptions:
         imagePullSecrets:
-          - valueFrom:
-              secretKeyRef:
-                name: ghcr-token
-                key: ghcr-token
+          valueFrom:
+            secretKeyRef:
+              name: ghcr-token
+              key: ghcr-token
     service:
       app:
         controller: zurg
