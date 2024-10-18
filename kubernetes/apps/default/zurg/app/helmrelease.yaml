@@ -41,7 +41,7 @@ spec:
                 spec:
                   httpGet:
                     path: /http/version.txt
-                    port: &port 9999
+                    port: &port 80
                   initialDelaySeconds: 0
                   periodSeconds: 10
                   timeoutSeconds: 1
@@ -65,7 +65,7 @@ spec:
         controller: zurg
         ports:
           http:
-            port: 9999
+            port: 80
     ingress:
       app:
         annotations:
