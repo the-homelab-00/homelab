@@ -59,7 +59,7 @@ spec:
 
     defaultPodOptions:
         imagePullSecrets:
-        - name: ghcr-token
+          - name: ghcr-token
     service:
       app:
         controller: zurg
