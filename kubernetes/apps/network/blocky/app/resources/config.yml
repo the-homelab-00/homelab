@@ -17,7 +17,7 @@ clientLookup:
   upstream: 10.0.0.1
 
 conditional:
-  fallbackUpstream: true
+  fallbackUpstream: false
   mapping:
     #gateway vip
     thepotato.uk: 10.0.0.62

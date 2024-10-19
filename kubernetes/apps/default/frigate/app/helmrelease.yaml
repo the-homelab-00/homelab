@@ -42,6 +42,9 @@ spec:
             env:
               TZ: Europe/London
               LIBVA_DRIVER_NAME: i965
+            envFrom:
+              - secretRef:
+                  name: frigate-secret
             probes:
               liveness: &probes
                 enabled: true
@@ -75,6 +78,7 @@ spec:
               topologyKey: kubernetes.io/hostname
       nodeSelector:
         intel.feature.node.kubernetes.io/gpu: "true"
+        google.feature.node.kubernetes.io/coral: "true"
     service:
       app:
         controller: frigate
@@ -98,22 +102,29 @@ spec:
                   identifier: app
                   port: http
     persistence:
-      # config:
-      #   existingClaim: frigate
-      #   globalMounts:
-      #     - path: /data
-      config-file:
-        type: secret
-        name: frigate-secret
+      config:
+        existingClaim: frigate-config
         advancedMounts:
           frigate:
             app:
-              - path: /config/config.yml
-                subPath: config.yml
+              - path: /config
+      config-file:
+        type: configMap
+        name: frigate-configmap
+        globalMounts:
+          - path: /config/config.yml
+            subPath: config.yml
+            readOnly: false
+      data:
+        existingClaim: frigate-media
+        advancedMounts:
+          frigate:
+            app:
+              - path: /media/frigate
       cache:
         type: emptyDir
         medium: Memory
-        sizeLimit: 4Gi
+        sizeLimit: 1Gi
         globalMounts:
           - path: /dev/shm
       # media:
