@@ -1,0 +1,10 @@
+pull_request_rules:
+  - name: Automatically merge Renovate PRs when all checks pass
+    conditions:
+      - author=renovate[bot]           # Only apply to PRs by Renovate bot
+      - check-success>=0               # All checks must pass (any number of checks)
+      - label!=do-not-merge            # Skip if 'do-not-merge' label is present
+    actions:
+      merge:
+        method: squash                 # Squash commits into one before merging
+        commit_message: title          # Use PR title as commit message
