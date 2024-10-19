@@ -7,4 +7,3 @@ pull_request_rules:
     actions:
       merge:
         method: squash                 # Squash commits into one before merging
-        commit_message: title          # Use PR title as commit message
