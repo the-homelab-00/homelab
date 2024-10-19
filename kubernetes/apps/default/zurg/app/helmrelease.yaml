@@ -27,25 +27,20 @@ spec:
       zurg:
         annotations:
           reloader.stakater.com/auto: "true"
-        imagePullSecrets:
-          name: github-pat
         containers:
           app:
             image:
               repository: ghcr.io/debridmediamanager/zurg
-              tag: 2024.10.14-nightly
+              tag: latest
             env:
               TZ: Europe/London
-            envFrom:
-              - secretRef:
-                  name: zurg-secret
             probes:
               liveness: &probes
                 enabled: true
                 custom: true
                 spec:
                   httpGet:
-                    path: /
+                    path: /http/version.txt
                     port: &port 80
                   initialDelaySeconds: 0
                   periodSeconds: 10
@@ -61,13 +56,16 @@ spec:
                 cpu: 10m
               limits:
                 memory: 1Gi
+
     defaultPodOptions:
+        imagePullSecrets:
+          - name: ghcr-token
     service:
       app:
         controller: zurg
         ports:
           http:
-            port: *port
+            port: 80
     ingress:
       app:
         annotations:
@@ -91,7 +89,7 @@ spec:
         advancedMounts:
           zurg:
             app:
-              - path: /config/config.yml
+              - path: /app/config.yml
                 subPath: config.yml
 
       # media:

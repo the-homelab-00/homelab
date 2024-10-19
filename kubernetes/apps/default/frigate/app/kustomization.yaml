@@ -5,9 +5,13 @@ kind: Kustomization
 resources:
   - ./externalsecret.yaml
   - ./helmrelease.yaml
+  - ./pvc.yaml
   - ../../../../templates/gatus/guarded
   - ../../../../templates/volsync
 configMapGenerator:
+  - name: frigate-configmap
+    files:
+      - config.yml=./resources/config.yml
   - name: frigate-loki-rules
     files:
       - frigate.yaml=./resources/lokirule.yaml
