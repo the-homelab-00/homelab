@@ -102,12 +102,12 @@ spec:
                   identifier: app
                   port: http
     persistence:
-      # config:
-      #   existingClaim: frigate-config
-      #   advancedMounts:
-      #     frigate:
-      #       app:
-      #         - path: /config
+      config:
+        existingClaim: frigate-config
+        advancedMounts:
+          frigate:
+            app:
+              - path: /config
       config-file:
         type: configMap
         name: frigate-configmap
@@ -115,12 +115,12 @@ spec:
           - path: /config/config.yml
             subPath: config.yml
             readOnly: false
-      # data:
-      #   existingClaim: frigate-media
-      #   advancedMounts:
-      #     frigate:
-      #       app:
-      #         - path: /media/frigate
+      data:
+        existingClaim: frigate-media
+        advancedMounts:
+          frigate:
+            app:
+              - path: /media/frigate
       cache:
         type: emptyDir
         medium: Memory
