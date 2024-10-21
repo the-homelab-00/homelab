@@ -74,6 +74,7 @@ objects:
     - person
     - cat
     - dog
+    - car
 
 record:
   enabled: true
