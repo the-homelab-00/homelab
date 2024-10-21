@@ -28,20 +28,63 @@ go2rtc:
     reolink_doorbell_front_door_sub:
       - ffmpeg:https://10.0.0.2//flv?port=1935&app=bcs&stream=channel0_ext.bcs&user={FRIGATE_REOLINK_USERNAME}&password={FRIGATE_REOLINK_PASSWORD}
       - rtsp://{FRIGATE_REOLINK_USERNAME}:{FRIGATE_REOLINK_PASSWORD}@10.0.0.2:554//h264Preview_01_sub
+
+review:
+  alerts:
+    labels:
+      - car
+      - cat
+      - dog
+      - person
+  detections:
+        labels:
+           - car
+            - person
+
+audio:
+    # Optional: Enable audio events (default: shown below)
+  enabled: False
+  # Optional: Configure the amount of seconds without detected audio to end the event (default: shown below)
+  max_not_heard: 30
+  # Optional: Configure the min rms volume required to run audio detection (default: shown below)
+  # As a rule of thumb:
+  #  - 200 - high sensitivity
+  #  - 500 - medium sensitivity
+  #  - 1000 - low sensitivity
+  min_volume: 500
+  # Optional: Types of audio to listen for (default: shown below)
+  listen:
+    - bark
+    - fire_alarm
+    - scream
+    - speech
+    - yell
+  # Optional: Filters to configure detection.
+  filters:
+    # Label that matches label in listen config.
+    speech:
+      # Minimum score that triggers an audio event (default: shown below)
+      threshold: 0.8
+
+detect:
+  enabled: true
+
 objects:
   track:
     - person
     - cat
     - dog
+
 record:
   enabled: true
   retain:
     days: 3
-    mode: motion
+    mode: all
   events:
     retain:
       default: 14
       mode: active_objects
+
 cameras:
   reolink_doorbell_front_door: # <--- this will be changed to your actual camera later
     ffmpeg:
@@ -51,6 +94,7 @@ cameras:
           roles:
             - detect
             - record
+            - audio
     motion:
       mask:
        - 0.243,0.01,0.732,0.002,0.727,0.067,0.237,0.067
