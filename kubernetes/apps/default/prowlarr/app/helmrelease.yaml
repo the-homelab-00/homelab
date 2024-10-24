@@ -43,9 +43,9 @@ spec:
               PROWLARR__ANALYTICS_ENABLED: "False"
               PROWLARR__AUTHENTICATION_METHOD: External
               PROWLARR__UPDATE__BRANCH: develop
-              envFrom: &envFrom
-                - secretRef:
-                    name: prowlarr-secret
+            envFrom: &envFrom
+              - secretRef:
+                  name: prowlarr-secret
             probes:
               liveness:
                 enabled: true
