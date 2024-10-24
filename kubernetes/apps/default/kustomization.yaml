@@ -10,3 +10,4 @@ resources:
   # - ./slskd/ks.yaml
   - ./minio/ks.yaml
   - ./zurg/ks.yaml
+  - ./prowlarr/ks.yaml
