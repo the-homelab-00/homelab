@@ -24,5 +24,3 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      APP_UID: "2000"
-      APP_GID: "2000"
