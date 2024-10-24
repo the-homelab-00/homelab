@@ -42,6 +42,7 @@ spec:
               PROWLARR__LOG_LEVEL: info
               PROWLARR__ANALYTICS_ENABLED: "False"
               PROWLARR__AUTHENTICATION_METHOD: External
+              PROWLARR__UPDATE__BRANCH: develop
               envFrom: &envFrom
                 - secretRef:
                     name: prowlarr-secret
