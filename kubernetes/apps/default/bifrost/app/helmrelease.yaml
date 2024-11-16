@@ -110,3 +110,7 @@ spec:
           - path: /app/config.yaml
             subPath: config.yaml
             readOnly: true
+      cert:
+        type: emptyDir
+        globalMounts:
+          - path: /certs
