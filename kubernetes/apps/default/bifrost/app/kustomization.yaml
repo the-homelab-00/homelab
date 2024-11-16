@@ -6,6 +6,6 @@ resources:
 configMapGenerator:
   - name: bifrost-configmap
     files:
-      - config.yml=./resources/config.yaml
+      - config.yaml=./resources/config.yaml
 generatorOptions:
   disableNameSuffixHash: true
