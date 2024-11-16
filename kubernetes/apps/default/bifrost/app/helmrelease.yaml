@@ -83,15 +83,15 @@ spec:
             port: 80
           https:
             port: 443
-    serviceMonitor:
-      app:
-        serviceName: *app
-        endpoints:
-          - port: http
-            scheme: http
-            path: /metrics
-            interval: 1m
-            scrapeTimeout: 10s
+    # serviceMonitor:
+    #   app:
+    #     serviceName: *app
+    #     endpoints:
+    #       - port: http
+    #         scheme: http
+    #         path: /metrics
+    #         interval: 1m
+    #         scrapeTimeout: 10s
     ingress:
       app:
         className: internal
