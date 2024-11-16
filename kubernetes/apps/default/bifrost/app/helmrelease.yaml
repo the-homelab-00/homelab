@@ -32,12 +32,8 @@ spec:
         containers:
           app:
             image:
-              repository: alpine #ghcr.io/chrivers/bifrost
-              tag: latest
-            command:
-              - /bin/sh
-            stdin: true
-            tty: true
+              repository: ghcr.io/chrivers/bifrost
+              tag: master
             env:
               TZ: "Europe/London"
             # probes:
