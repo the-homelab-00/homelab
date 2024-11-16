@@ -32,8 +32,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/chrivers/bifrost
-              tag: master
+              repository: alpine #ghcr.io/chrivers/bifrost
+              tag: latest
             env:
               TZ: "Europe/London"
             # probes:
