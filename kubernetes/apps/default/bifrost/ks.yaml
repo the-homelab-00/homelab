@@ -7,7 +7,7 @@ metadata:
   name: &app bifrost
   namespace: flux-system
 spec:
-  targetNamespace: network
+  targetNamespace: default
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
