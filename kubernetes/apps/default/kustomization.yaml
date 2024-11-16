@@ -11,3 +11,4 @@ resources:
   - ./minio/ks.yaml
   - ./zurg/ks.yaml
   - ./prowlarr/ks.yaml
+  - ./zigbee2mqtt/ks.yaml
