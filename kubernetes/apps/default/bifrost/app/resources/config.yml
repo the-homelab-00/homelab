@@ -1,0 +1,15 @@
+bifrost:
+  # Override the default path to the one used in the docker image
+  cert_file: "certs/cert.pem"
+
+bridge:
+  name: Bifrost
+  mac: 90:E2:BA:56:B7:D0
+  ipaddress: 10.0.0.68
+  netmask: 255.255.255.0
+  gateway: 10.0.0.1
+  timezone: Europe/London
+
+z2m:
+  server1:
+    url: ws://10.0.0.100:8080
