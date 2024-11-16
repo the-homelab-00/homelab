@@ -5,7 +5,7 @@ bifrost:
 bridge:
   name: Bifrost
   mac: 90:E2:BA:56:B7:D0
-  ipaddress: 10.0.0.68
+  ipaddress: 10.0.0.80
   netmask: 255.255.255.0
   gateway: 10.0.0.1
   timezone: Europe/London
