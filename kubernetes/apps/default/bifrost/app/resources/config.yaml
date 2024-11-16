@@ -12,4 +12,4 @@ bridge:
 
 z2m:
   server1:
-    url: ws://zigbee2mqtt.default.svc.cluster.local/api:80
+    url: ws://zigbee2mqtt.default.svc.cluster.local:80/api
