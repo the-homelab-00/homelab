@@ -30,8 +30,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/koenkk/zigbee2mqtt
-              tag: 1.41.0
+              repository: alpine
+              tag: latest
             env:
               TZ: Europe/London
               ZIGBEE2MQTT_DATA: /config
