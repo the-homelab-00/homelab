@@ -29,6 +29,10 @@ spec:
         strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"
+        pod:
+          metadata:
+              annotations:
+                cni.cilium.io/mac-address: 02:79:63:E0:BA:CE
         containers:
           app:
             image:
@@ -69,7 +73,6 @@ spec:
         controller: *app
         type: LoadBalancer
         annotations:
-          cni.cilium.io/mac-address: 02:79:63:E0:BA:CE
           lbipam.cilium.io/ips: 10.0.0.68
         ports:
           http:
