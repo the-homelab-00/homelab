@@ -75,11 +75,9 @@ spec:
           lbipam.cilium.io/ips: 10.0.0.68
         ports:
           http:
-            name: bifrost-http
             port: 80
             targetPort: 8080
           https:
-            name: bifrost-https
             port: 443
             targetPort: 8443
     # serviceMonitor:
