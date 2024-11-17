@@ -102,10 +102,10 @@ spec:
         type: configMap
         name: bifrost-configmap # overriden by kustomizeconfig
         globalMounts:
-          - path: /app/config.yaml
+          - path: /bifrost/config.yaml
             subPath: config.yaml
             readOnly: true
       cert:
         type: emptyDir
         globalMounts:
-          - path: /app/certs
+          - path: /bifrost/certs
