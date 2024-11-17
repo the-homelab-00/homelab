@@ -29,7 +29,6 @@ spec:
         strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"
-          cni.cilium.io/mac-address: 02:79:63:E0:BA:CE
         containers:
           app:
             image:
