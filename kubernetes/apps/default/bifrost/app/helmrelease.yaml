@@ -58,6 +58,8 @@ spec:
               capabilities:
                 add:
                   - NET_BIND_SERVICE
+            annotations:
+              cni.cilium.io/mac-address: 02:79:63:E0:BA:CE
     defaultPodOptions:
       hostNetwork: true
       securityContext:
@@ -75,6 +77,7 @@ spec:
         controller: *app
         type: LoadBalancer
         annotations:
+          cni.cilium.io/mac-address: 02:79:63:E0:BA:CE
           lbipam.cilium.io/ips: 10.0.0.68
         ports:
           http:
