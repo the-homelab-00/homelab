@@ -26,6 +26,8 @@ spec:
   values:
     controllers:
       zigbee2mqtt:
+        pod:
+          restartPolicy: Never
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
