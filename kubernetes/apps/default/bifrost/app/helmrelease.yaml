@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: ghcr.io/thepotato97/bifrost
-              tag: sha-5cf955f
+              tag: sha-9d92ebf
             env:
               TZ: "Europe/London"
             # probes:
@@ -102,10 +102,10 @@ spec:
         type: configMap
         name: bifrost-configmap # overriden by kustomizeconfig
         globalMounts:
-          - path: /bifrost/config.yaml
+          - path: /app/config.yaml
             subPath: config.yaml
             readOnly: true
       cert:
         type: emptyDir
         globalMounts:
-          - path: /bifrost/certs
+          - path: /app/certs
