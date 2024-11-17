@@ -111,9 +111,9 @@ spec:
                   identifier: app
                   port: http
     persistence:
-      # config:
-      #   existingClaim: zigbee-config
-      cert:
-        type: emptyDir
-        globalMounts:
-          - path: /config
+      config:
+        existingClaim: zigbee-config
+      # cert:
+      #   type: emptyDir
+      #   globalMounts:
+      #     - path: /config
