@@ -117,6 +117,8 @@ spec:
     persistence:
       config:
         existingClaim: zigbee-config
+        globalMounts:
+          - path: /config
       # cert:
       #   type: emptyDir
       #   globalMounts:
