@@ -5,6 +5,7 @@ kind: HelmRelease
 metadata:
   name: zigbee2mqtt
 spec:
+  restartPolicy: Never
   interval: 40m
   chart:
     spec:
