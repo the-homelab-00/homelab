@@ -32,8 +32,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/chrivers/bifrost
-              tag: master
+              repository: ghcr.io/thepotato97/bifrost
+              tag: sha256-bd595c0919c743d06e48bef96d2062ed7d8af111903112bb009be9bd991ca210.sig
             env:
               TZ: "Europe/London"
             # probes:
