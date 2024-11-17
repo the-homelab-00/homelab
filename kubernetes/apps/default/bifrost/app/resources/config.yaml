@@ -6,6 +6,8 @@ bridge:
   name: Bifrost
   mac: 90:E2:BA:56:B7:D0
   ipaddress: 0.0.0.0
+  http_port: 8080
+  https_port: 8443
   netmask: 255.255.255.0
   gateway: 10.0.0.1
   timezone: Europe/London
