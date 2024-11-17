@@ -31,7 +31,7 @@ spec:
         containers:
           app:
             image:
-              repository: debian
+              repository: ghcr.io/onedr0p/cluster-template/devcontainer
               tag: latest
             command:
               - /bin/sh
