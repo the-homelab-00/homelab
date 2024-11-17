@@ -5,7 +5,7 @@ kind: HelmRelease
 metadata:
   name: zigbee2mqtt
 spec:
-  interval: 40m
+  interval: 30m
   chart:
     spec:
       chart: app-template
@@ -30,12 +30,8 @@ spec:
         containers:
           app:
             image:
-              repository: debian
-              tag: latest
-            command:
-              - /bin/sh
-            stdin: true
-            tty: true
+              repository: ghcr.io/koenkk/zigbee2mqtt
+              tag: 1.41.0
             env:
               TZ: Europe/London
               ZIGBEE2MQTT_DATA: /config
@@ -74,16 +70,16 @@ spec:
             envFrom:
               - secretRef:
                   name: zigbee2mqtt-secret
-            # probes:
-            #   liveness:
-            #     enabled: true
-            #   readiness:
-            #     enabled: true
-            #   startup:
-            #     enabled: true
-            #     spec:
-            #       failureThreshold: 30
-            #       periodSeconds: 10
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 10
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
@@ -117,9 +113,7 @@ spec:
     persistence:
       config:
         existingClaim: zigbee-config
-        globalMounts:
-          - path: /config
       # cert:
       #   type: emptyDir
       #   globalMounts:
-      #     - path: /config
+      #     - path: /app/data
