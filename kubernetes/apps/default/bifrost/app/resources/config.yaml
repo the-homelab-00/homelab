@@ -1,6 +1,7 @@
 bifrost:
   # Override the default path to the one used in the docker image
-  cert_file: "certs/cert.pem"
+  cert_file: "persistence/cert.pem"
+  state_file: "persistence/state.yaml"
 
 bridge:
   name: Bifrost
@@ -15,3 +16,8 @@ bridge:
 z2m:
   server1:
     url: ws://zigbee2mqtt.default.svc.cluster.local:80/api
+
+rooms:
+  bedroom_group:
+    name: Bedroom Main Light
+    icon: bedroom
