@@ -4,7 +4,7 @@ bifrost:
 
 bridge:
   name: Bifrost
-  mac: 90:E2:BA:56:B7:D0
+  mac: 02:79:63:E0:BA:CE
   ipaddress: 0.0.0.0
   http_port: 8080
   https_port: 8443
