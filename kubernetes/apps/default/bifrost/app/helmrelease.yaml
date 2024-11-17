@@ -108,7 +108,7 @@ spec:
       bifrost-persistence:
         existingClaim: bifrost-persistence
         advancedMounts:
-          frigate:
+          bifrost:
             app:
               - path: /app/persistence
       cert:
