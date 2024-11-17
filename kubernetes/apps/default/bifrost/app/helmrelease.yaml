@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: ghcr.io/thepotato97/bifrost
-              tag: sha256-eb086fb90f928fa67d2c4f8377f1ba67122d1b711fa1363ad904d30ccc732b1c.sig
+              tag: sha256-912c52f9d267bd3d6f8b76c4e65e284c27e1f1ca6c47ce01d349c8b2abdb79da.sig
             env:
               TZ: "Europe/London"
             # probes:
