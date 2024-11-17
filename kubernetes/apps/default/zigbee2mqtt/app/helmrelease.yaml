@@ -34,8 +34,8 @@ spec:
               tag: latest
             command:
               - /bin/sh
-            # stdin: true
-            # tty: true
+            stdin: true
+            tty: true
             env:
               TZ: Europe/London
               ZIGBEE2MQTT_DATA: /config
@@ -74,16 +74,16 @@ spec:
             envFrom:
               - secretRef:
                   name: zigbee2mqtt-secret
-            probes:
-              liveness:
-                enabled: true
-              readiness:
-                enabled: true
-              startup:
-                enabled: true
-                spec:
-                  failureThreshold: 30
-                  periodSeconds: 10
+            # probes:
+            #   liveness:
+            #     enabled: true
+            #   readiness:
+            #     enabled: true
+            #   startup:
+            #     enabled: true
+            #     spec:
+            #       failureThreshold: 30
+            #       periodSeconds: 10
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
