@@ -32,11 +32,11 @@ spec:
             image:
               repository: debian
               tag: latest
-          command:
-            - /bin/sh
-          args:
-            - "-c"
-            - "while true; do sleep 3600; done"
+            command:
+              - /bin/sh
+            args:
+              - "-c"
+              - "while true; do sleep 3600; done"
             env:
               TZ: Europe/London
               ZIGBEE2MQTT_DATA: /config
