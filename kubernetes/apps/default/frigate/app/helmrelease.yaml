@@ -89,6 +89,8 @@ spec:
             port: 8554
           webrtc:
             port: 8555
+          go2rtc:
+            port: 1984
     ingress:
       app:
         annotations:
