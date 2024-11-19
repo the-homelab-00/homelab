@@ -24,8 +24,8 @@ mqtt:
 go2rtc:
   streams:
     reolink_doorbell_front_door:
-      - ffmpeg:http://10.0.0.2//flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_REOLINK_USERNAME}&password={FRIGATE_REOLINK_PASSWORD}#video=h264#audio=copy#audio=opus#raw=-vf
-        #"lenscorrection=cx=0.5:cy=0.5:k1=-0.290:k2=-0.012"
+      - ffmpeg:http://10.0.0.2//flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_REOLINK_USERNAME}&password={FRIGATE_REOLINK_PASSWORD}#video=h264#audio=copy#audio=opus"
+        #"#raw=-vflenscorrection=cx=0.5:cy=0.5:k1=-0.290:k2=-0.012"
       - rtsp://{FRIGATE_REOLINK_USERNAME}:{FRIGATE_REOLINK_PASSWORD}@10.0.0.2:554///h264Preview_01_main
     reolink_doorbell_front_door_sub:
       - ffmpeg:https://10.0.0.2//flv?port=1935&app=bcs&stream=channel0_ext.bcs&user={FRIGATE_REOLINK_USERNAME}&password={FRIGATE_REOLINK_PASSWORD}
