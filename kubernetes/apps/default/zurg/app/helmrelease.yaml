@@ -91,6 +91,10 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /app/dump
+      trash:
+        type: emptyDir
+        globalMounts:
+          - path: /app/trash
       config-file:
         type: secret
         name: zurg-secret
