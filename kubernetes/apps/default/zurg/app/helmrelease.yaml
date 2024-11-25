@@ -83,6 +83,10 @@ spec:
       #   existingClaim: zurg
       #   globalMounts:
       #     - path: /data
+      logs:
+        type: empty-dir
+        globalMounts:
+          - path: /app/logs
       config-file:
         type: secret
         name: zurg-secret
