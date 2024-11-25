@@ -89,8 +89,8 @@ spec:
           - path: /app/logs
       dump:
         type: emptyDir
-          globalMounts:
-            - path: /app/dump
+        globalMounts:
+          - path: /app/dump
       config-file:
         type: secret
         name: zurg-secret
