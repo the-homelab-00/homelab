@@ -79,10 +79,10 @@ spec:
                   identifier: app
                   port: http
     persistence:
-      # config:
-      #   existingClaim: zurg
-      #   globalMounts:
-      #     - path: /data
+      config:
+        existingClaim: zurg-data
+        globalMounts:
+           - path: /app/data
       logs:
         type: emptyDir
         globalMounts:
