@@ -1,7 +1,5 @@
 ffmpeg:
   hwaccel_args: preset-vaapi
-  output_args:
-    record: preset-record-generic-audio-copy
 
 detectors:
   coral:
@@ -95,6 +93,9 @@ record:
 cameras:
   unifi_back:
     ffmpeg:
+      output_args:
+        record: preset-record-ubiquiti
+      hwaccel_args: []
       inputs:
        - path: rtsp://127.0.0.1:8554/unifi_back
          input_args: preset-rtsp-restream
@@ -104,6 +105,9 @@ cameras:
            - audio
   unifi_front:
     ffmpeg:
+      output_args:
+        record: preset-record-ubiquiti
+      hwaccel_args: []
       inputs:
        - path: rtsp://127.0.0.1:8554/unifi_front
          input_args: preset-rtsp-restream
@@ -113,6 +117,8 @@ cameras:
            - audio
   reolink_doorbell_front_door: # <--- this will be changed to your actual camera later
     ffmpeg:
+      output_args:
+        record: preset-record-generic-audio-copy
       inputs:
         - path: rtsp://127.0.0.1:8554/reolink_doorbell_front_door
           input_args: preset-rtsp-restream
