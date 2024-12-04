@@ -93,7 +93,7 @@ record:
       mode: active_objects
 
 cameras:
-  unifi_front:
+  unifi_back:
     ffmpeg:
       inputs:
        - path: rtsp://127.0.0.1:8554/unifi_back
