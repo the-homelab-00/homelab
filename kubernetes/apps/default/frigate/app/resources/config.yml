@@ -71,7 +71,9 @@ audio:
       threshold: 0.8
 
 detect:
-  enabled: true
+  stationary:
+    interval: 50
+    threshold: 50
 
 objects:
   track:
