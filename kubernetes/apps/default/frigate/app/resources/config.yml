@@ -30,6 +30,10 @@ go2rtc:
     reolink_doorbell_front_door_sub:
       - ffmpeg:https://10.0.0.2/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user={FRIGATE_REOLINK_USERNAME}&password={FRIGATE_REOLINK_PASSWORD}
       #- rtsp://{FRIGATE_REOLINK_USERNAME}:{FRIGATE_REOLINK_PASSWORD}@10.0.0.2:554//h264Preview_01_sub
+    unifi_back:
+      - rtspx://49.13.69.116:7441/s9W4Z6RD7fH1xpOE
+    unifi_front:
+      - rtspx://49.13.69.116:7441/DnXU3hLaZp2vj3sU
 
 review:
   alerts:
@@ -89,6 +93,24 @@ record:
       mode: active_objects
 
 cameras:
+  unifi_front:
+    ffmpeg:
+      inputs:
+       - path: rtsp://127.0.0.1:8554/unifi_back
+         input_args: preset-rtsp-restream
+         roles:
+           - detect
+           - record
+           - audio
+  unifi_front:
+    ffmpeg:
+      inputs:
+       - path: rtsp://127.0.0.1:8554/unifi_front
+         input_args: preset-rtsp-restream
+         roles:
+           - detect
+           - record
+           - audio
   reolink_doorbell_front_door: # <--- this will be changed to your actual camera later
     ffmpeg:
       inputs:
