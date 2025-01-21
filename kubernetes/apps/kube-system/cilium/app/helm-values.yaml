@@ -1,8 +1,10 @@
 ---
 autoDirectNodeRoutes: true
 bpf:
-  masquerade: true # Required for Talos `.machine.features.hostDNS.forwardKubeDNSToHost`
-  hostLegacyRouting: true
+  datapathMode: netkit
+  masquerade: true
+  preallocateMaps: true
+  tproxy: true
 bgpControlPlane:
   enabled: true
 cgroup:
