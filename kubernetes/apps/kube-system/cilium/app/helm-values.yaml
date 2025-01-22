@@ -1,7 +1,7 @@
 ---
 autoDirectNodeRoutes: true
 bpf:
-  masquerade: true # Required for Talos `.machine.features.hostDNS.forwardKubeDNSToHost`
+  masquerade: false # Required for Talos `.machine.features.hostDNS.forwardKubeDNSToHost`
   hostLegacyRouting: true
 bgpControlPlane:
   enabled: true
@@ -9,8 +9,6 @@ cgroup:
   automount:
     enabled: false
   hostRoot: /sys/fs/cgroup
-cni:
-  exclusive: false # Required for pairing with Multus CNI
 cluster:
   id: 1
   name: "home-kubernetes"
