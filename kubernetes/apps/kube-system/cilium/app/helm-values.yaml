@@ -1,8 +1,10 @@
 ---
 autoDirectNodeRoutes: true
 bpf:
-  masquerade: false # Required for Talos `.machine.features.hostDNS.forwardKubeDNSToHost`
-  hostLegacyRouting: true
+  datapathMode: netkit
+  masquerade: true
+  preallocateMaps: true
+  tproxy: true
 bgpControlPlane:
   enabled: true
 cgroup:
@@ -33,7 +35,7 @@ l2announcements:
   enabled: true
 loadBalancer:
   algorithm: maglev
-  mode: snat
+  mode: dsr
 localRedirectPolicy: true
 operator:
   replicas: 1
