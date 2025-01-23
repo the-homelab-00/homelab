@@ -1,12 +1,7 @@
 ---
 autoDirectNodeRoutes: true
 bpf:
-  datapathMode: netkit
-  masquerade: true
-  preallocateMaps: true
-  tproxy: true
-bgpControlPlane:
-  enabled: true
+  masquerade: false # Required for Talos `.machine.features.hostDNS.forwardKubeDNSToHost`
 cgroup:
   automount:
     enabled: false
@@ -35,7 +30,7 @@ l2announcements:
   enabled: true
 loadBalancer:
   algorithm: maglev
-  mode: dsr
+  mode: snat
 localRedirectPolicy: true
 operator:
   replicas: 1
@@ -52,8 +47,6 @@ securityContext:
       - IPC_LOCK
       - SYS_ADMIN
       - SYS_RESOURCE
-      - PERFMON
-      - BPF
       - DAC_OVERRIDE
       - FOWNER
       - SETGID
