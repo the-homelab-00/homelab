@@ -87,6 +87,8 @@ spec:
         ports:
           http:
             port: *port
+          beast-output:
+            port: 30005
     ingress:
       app:
         annotations:
