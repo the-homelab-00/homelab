@@ -64,7 +64,7 @@ spec:
                 memory: 0.5Gi
     defaultPodOptions:
       nodeSelector:
-        rtlsdrblog.feature.node.kubernetes.io/rtlsdr: "true"
+        rtlsdr.feature.node.kubernetes.io/rtlsdrblog-v4: "true"
     service:
       app:
         controller: ultrafeeder
