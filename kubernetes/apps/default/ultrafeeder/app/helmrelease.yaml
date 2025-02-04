@@ -88,16 +88,12 @@ spec:
     persistence:
       config:
         existingClaim: ultrafeeder-history
-        advancedMounts:
-          ultrafeeder:
-            app:
-              - path: /opt/adsb/ultrafeeder/globe_history
+        globalMounts:
+           - path: /var/globe_history
       data:
         existingClaim: ultrafeeder-graphs
-        advancedMounts:
-          ultrafeeder:
-            app:
-              - path: /opt/adsb/ultrafeeder/graphs1090
+        globalMounts:
+           - path: /var/lib/collectd
       run-cache:
         type: emptyDir
         medium: Memory
