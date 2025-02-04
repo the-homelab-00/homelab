@@ -35,6 +35,7 @@ spec:
               tag: 20250127.1742_linux_amd64
             env:
               BEASTHOST: ultrafeeder.default.svc.cluster.local
+              SITENAME: PAdsb
             envFrom:
               - secretRef:
                   name: adsbexchange-secret
