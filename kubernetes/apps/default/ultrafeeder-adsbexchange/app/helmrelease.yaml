@@ -33,9 +33,6 @@ spec:
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-adsbexchange
               tag: 20250127.1742_linux_amd64
-            securityContext:
-              allowPrivilegeEscalation: false
-              capabilities: {drop: [ALL]}
             env:
               BEASTHOST: ultrafeeder.default.svc.cluster.local
             envFrom:
