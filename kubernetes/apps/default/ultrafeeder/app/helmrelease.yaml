@@ -99,7 +99,7 @@ spec:
       cache:
         type: emptyDir
         medium: Memory
-        sizeLimit: 1Gi
+        sizeLimit: 100Mi
         globalMounts:
           - path: /run
           - path: /tmp
