@@ -52,7 +52,7 @@ spec:
               READSB_ENABLE_BIASTEE: true
               TAR1090_RANGE_OUTLINE_WIDTH: 2.0
               TAR1090_RANGERINGSDISTANCES: 50,100,150,200
-              TAR1090_USEROUTEAPI: true
+              TAR1090_USEROUTEAPI: ON
               LOGLEVEL: verbose
               GPSD_DEBUG: true
             envFrom:
