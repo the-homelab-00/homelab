@@ -97,20 +97,20 @@ spec:
             app:
               - path: /opt/adsb/ultrafeeder/graphs1090
       run-cache:
-        enabled: true
         type: emptyDir
         medium: Memory
         sizeLimit: 256Mi
-        mountPath: /run
+        globalMounts:
+          - path: /run
       tmp-cache:
-        enabled: true
         type: emptyDir
         medium: Memory
         sizeLimit: 128Mi
-        mountPath: /tmp
+        globalMounts:
+          - path: /tmp
       log-cache:
-        enabled: true
         type: emptyDir
         medium: Memory
         sizeLimit: 32Mi
-        mountPath: /var/log
+        globalMounts:
+          - path: /var/log
