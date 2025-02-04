@@ -24,7 +24,7 @@ nodes:
   - hostname: "home-lab-1"
     ipAddress: "10.0.0.10"
     installDisk: "/dev/sdb"
-    talosImageURL: factory.talos.dev/installer/a4ae9688e13df76f19381c31d12d60374a68d80163010f0493b275458309f189
+    talosImageURL: factory.talos.dev/installer/849080f24057cd90ec04952735767b5b0aa29dae20e5200e031e9d3fc7d58fe0
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
