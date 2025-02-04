@@ -96,20 +96,21 @@ spec:
           ultrafeeder:
             app:
               - path: /opt/adsb/ultrafeeder/graphs1090
-      cache:
+      run-cache:
+        enabled: true
         type: emptyDir
         medium: Memory
-        sizeLimit: 100Mi
-        globalMounts:
-          - path: /run
-          - path: /tmp
-      additionalMounts:
-        - path: /proc/diskstats
-          hostPath:
-            path: /proc/diskstats
-            type: File
-          readOnly: true
-        - path: /dev/bus/usb
-          hostPath:
-            path: /dev/bus/usb
-            type: Directory
+        sizeLimit: 256Mi
+        mountPath: /run
+      tmp-cache:
+        enabled: true
+        type: emptyDir
+        medium: Memory
+        sizeLimit: 128Mi
+        mountPath: /tmp
+      log-cache:
+        enabled: true
+        type: emptyDir
+        medium: Memory
+        sizeLimit: 32Mi
+        mountPath: /var/log
