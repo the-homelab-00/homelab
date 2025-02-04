@@ -102,11 +102,7 @@ spec:
         sizeLimit: 1Gi
         globalMounts:
           - path: /run
-            exec: true
           - path: /tmp
-            sizeLimit: 128Mi
-          - path: /var/log
-            sizeLimit: 32Mi
       additionalMounts:
         - path: /proc/diskstats
           hostPath:
