@@ -39,6 +39,7 @@ spec:
               tag: latest-build-635
             env:
               TZ: Europe/London
+              READSB_RTLSDR_DEVICE: 1090
               READSB_DEVICE_TYPE: rtlsdr
             envFrom:
               - secretRef:
