@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/nfd.k8s-sigs.io/nodefeaturerule_v1alpha1.json
 apiVersion: nfd.k8s-sigs.io/v1alpha1
 kind: NodeFeatureRule
 metadata:
@@ -6,9 +7,10 @@ metadata:
 spec:
   rules:
     - # RTL-SDR Blog V4
-      name: rtlsdrblog.v4
+      name: rtlsdr.blog
       labels:
-        rtlsdrblog.feature.node.kubernetes.io/v4: "true"
+        rtlsdr.feature.node.kubernetes.io/rtlsdrblog-v4: "true"
+        rtlsdr.feature.node.kubernetes.io/rtlsdr: "true"
       matchFeatures:
         - feature: usb.device
           matchExpressions:
