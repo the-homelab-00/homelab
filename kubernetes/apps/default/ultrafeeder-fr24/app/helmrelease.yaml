@@ -35,7 +35,6 @@ spec:
               tag: latest-build-765
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
               capabilities: {drop: [ALL]}
             env:
               BEASTHOST: ultrafeeder.default.svc.cluster.local
