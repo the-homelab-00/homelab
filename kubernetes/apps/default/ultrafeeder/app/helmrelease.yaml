@@ -39,6 +39,7 @@ spec:
               tag: latest-build-635
             env:
               TZ: Europe/London
+              READSB_DEVICE_TYPE: rtlsdr
             envFrom:
               - secretRef:
                   name: ultrafeeder-secret
