@@ -53,6 +53,7 @@ spec:
               TAR1090_RANGERINGSDISTANCES: 50,100,150,200
               TAR1090_USEROUTEAPI: true
               LOGLEVEL: verbose
+              GPSD_DEBUG: true
             envFrom:
               - secretRef:
                   name: ultrafeeder-secret
