@@ -32,7 +32,7 @@ spec:
           app:
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-adsbexchange
-              tag: 20250127.1742_nohealthcheck
+              tag: 20250210.1909
             env:
               BEASTHOST: ultrafeeder.default.svc.cluster.local
               SITENAME: PAdsb
