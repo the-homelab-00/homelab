@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: ghcr.io/chrivers/bifrost
-              tag: dev-2025-03-12
+              tag: dev-2025-03-12@sha256:eb70780c327cffa9f76be510c95185f138ca689d5fe39a0963dac6a2a9f75ad5
             env:
               TZ: "Europe/London"
             # probes:
