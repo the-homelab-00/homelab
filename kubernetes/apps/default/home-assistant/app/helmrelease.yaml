@@ -113,10 +113,10 @@ spec:
         existingClaim: zigbee-config
         globalMounts:
           - path: /zigbee
-      bifrost:
-        existingClaim: bifrost-persistence
-        globalMounts:
-          - path: /bifrost
+      # bifrost:
+      #   existingClaim: bifrost-persistence
+      #   globalMounts:
+      #     - path: /bifrost
       logs:
         type: emptyDir
         globalMounts:
