@@ -12,7 +12,7 @@ resources:
   - ./zurg/ks.yaml
   - ./prowlarr/ks.yaml
   - ./zigbee2mqtt/ks.yaml
-  - ./bifrost/ks.yaml
+  # - ./bifrost/ks.yaml
   - ./home-assistant/ks.yaml
   - ./ultrafeeder/ks.yaml
   - ./ultrafeeder-fr24/ks.yaml
