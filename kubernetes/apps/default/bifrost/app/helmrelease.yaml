@@ -32,8 +32,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/thepotato97/bifrost
-              tag: sha-9d92ebf
+              repository: ghcr.io/chrivers/bifrost
+              tag: master-2025-03-12
             env:
               TZ: "Europe/London"
             # probes:
