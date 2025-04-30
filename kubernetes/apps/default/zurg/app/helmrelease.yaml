@@ -93,7 +93,7 @@ spec:
           - path: /app/dump
       strm:
         type: emptyDir
-        globalmounts:
+        globalMounts:
           - path: /app/strm
       trash:
         type: emptyDir
