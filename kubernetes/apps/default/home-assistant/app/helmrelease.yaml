@@ -30,7 +30,7 @@ spec:
         containers:
           app:
             image:
-              repository: docker pull ghcr.io/home-operations/home-assistant:
+              repository: ghcr.io/home-operations/home-assistant
               tag: 2025.5@sha256:2ff8c411175e243674c33a14d37e6b4145eea77c1bc3873086cdd396e2afabb9
             env:
               TZ: America/New_York
