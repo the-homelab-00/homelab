@@ -17,3 +17,4 @@ resources:
   - ./ultrafeeder/ks.yaml
   - ./ultrafeeder-fr24/ks.yaml
   - ./ultrafeeder-adsbexchange/ks.yaml
+  - ./sparkle/ks.yaml
