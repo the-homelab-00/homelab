@@ -32,7 +32,7 @@ spec:
           app:
             image:
               repository: ghcr.io/sdr-enthusiasts/docker-adsbexchange
-              tag: 20250210.1909
+              tag: latest-build-846@sha256:642fc67b770312699cac12fee1cb1eca5e7569d394b8237be584d8dbf28af9e6
             env:
               BEASTHOST: ultrafeeder.default.svc.cluster.local
               SITENAME: PAdsb
