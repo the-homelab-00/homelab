@@ -90,12 +90,13 @@ spec:
           - memory-snapshot-on-shutdown
           - new-service-discovery-manager
         retention: 14d
-        retentionSize: 70GB
+        retentionSize: 2GiB
         resources:
           requests:
             cpu: 100m
+            memory: 400Mi
           limits:
-            memory: 500Mi
+            memory: 400Mi
         storageSpec:
           volumeClaimTemplate:
             spec:
