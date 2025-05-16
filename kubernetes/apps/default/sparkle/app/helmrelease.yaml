@@ -33,8 +33,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/home-operations/sparkle
-              tag: 1.36.1.5049
+              repository: meinya/sparkle-fe
+              tag: latest@sha256:397544bf3132ff05fa6b3ff13d5d7f0ed88bb8cbeee3689f9e7df051e6c55270
             env:
               SERVER_BE: http://sparkle:1323
               PORT: &port 3000
