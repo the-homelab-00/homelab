@@ -75,7 +75,7 @@ spec:
             port: 80
           https:
             port: 443
-          entm_port:
+          entm-port:
             port: 2100
     # serviceMonitor:
     #   app:
