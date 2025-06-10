@@ -9,6 +9,7 @@ bridge:
   ipaddress: 0.0.0.0
   http_port: 80
   https_port: 443
+  entm_port: 2100
   netmask: 255.255.255.0
   gateway: 10.0.0.1
   timezone: Europe/London
