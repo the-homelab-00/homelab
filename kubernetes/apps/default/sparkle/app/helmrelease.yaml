@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: meinya/sparkle-fe
-              tag: latest@sha256:397544bf3132ff05fa6b3ff13d5d7f0ed88bb8cbeee3689f9e7df051e6c55270
+              tag: latest@sha256:ac121cc10d99c0de1d8265b943d5c444d31d2a8cf8321fa7205d87ecb973c1fa
             env:
               SERVER_BE: http://sparkle:1323
               PORT: &port 3000
