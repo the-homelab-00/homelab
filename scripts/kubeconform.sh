@@ -16,7 +16,7 @@ kubeconform_args=(
   "-strict"
   "-ignore-missing-schemas"
   "-skip"
-  "Secret,ReplicationDestination,ReplicationSource"
+  "Gateway,HTTPRoute,Secret,ReplicationDestination,ReplicationSource"
   "-schema-location"
   "default"
   "-schema-location"
@@ -24,41 +24,32 @@ kubeconform_args=(
   "-verbose"
 )
 
-# Function to validate YAML files
-validate_yaml_files() {
-  local dir="$1"
-  echo "=== Validating standalone manifests in ${dir} ==="
-
-  find "${dir}" -maxdepth 1 -type f -name '*.yaml' -print0 | while IFS= read -r -d '' file; do
-    echo "Validating file: ${file}"
-    if kubeconform "${kubeconform_args[@]}" "${file}"; then
-      echo "Validation successful for ${file}"
-    else
-      echo "Validation failed for ${file}"
-      exit 1
+echo "=== Validating standalone manifests in ${KUBERNETES_DIR}/flux ==="
+find "${KUBERNETES_DIR}/flux" -maxdepth 1 -type f -name '*.yaml' -print0 | while IFS= read -r -d $'\0' file;
+do
+    kubeconform "${kubeconform_args[@]}" "${file}"
+    if [[ ${PIPESTATUS[0]} != 0 ]]; then
+        exit 1
     fi
-  done
-}
+done
 
-# Function to validate Kustomization files
-validate_kustomizations() {
-  local dir="$1"
-  echo "=== Validating kustomizations in ${dir} ==="
-
-  find "${dir}" -type f -name "${kustomize_config}" -print0 | while IFS= read -r -d '' file; do
+echo "=== Validating kustomizations in ${KUBERNETES_DIR}/flux ==="
+find "${KUBERNETES_DIR}/flux" -type f -name $kustomize_config -print0 | while IFS= read -r -d $'\0' file;
+do
     echo "=== Validating kustomizations in ${file/%$kustomize_config} ==="
-    echo "Building kustomization from ${file/%$kustomize_config}"
-
-    if kustomize build "${file/%$kustomize_config}" "${kustomize_args[@]}" | kubeconform "${kubeconform_args[@]}"; then
-      echo "Validation successful for kustomization in ${file/%$kustomize_config}"
-    else
-      echo "Validation failed for kustomization in ${file/%$kustomize_config}"
-      exit 1
+    kustomize build "${file/%$kustomize_config}" "${kustomize_args[@]}" | kubeconform "${kubeconform_args[@]}"
+    if [[ ${PIPESTATUS[0]} != 0 ]]; then
+        exit 1
     fi
-  done
-}
+done
 
-# Validate standalone manifests and Kustomizations in flux and apps directories
-validate_yaml_files "${KUBERNETES_DIR}/flux"
-validate_kustomizations "${KUBERNETES_DIR}/flux"
-validate_kustomizations "${KUBERNETES_DIR}/apps"
+echo "=== Validating kustomizations in ${KUBERNETES_DIR}/apps ==="
+find "${KUBERNETES_DIR}/apps" -type f -name $kustomize_config -print0 | while IFS= read -r -d $'\0' file;
+do
+    echo "=== Validating kustomizations in ${file/%$kustomize_config} ==="
+    kustomize build "${file/%$kustomize_config}" "${kustomize_args[@]}" | kubeconform "${kubeconform_args[@]}"
+    if [[ ${PIPESTATUS[0]} != 0 ]]; then
+        exit 1
+    fi
+done
+
