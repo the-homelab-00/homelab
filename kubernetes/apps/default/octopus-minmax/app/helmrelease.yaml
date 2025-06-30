@@ -29,8 +29,6 @@ spec:
             env:
               TZ: Europe/London
               EXECUTION_TIME: 23:00
-              ONE_OFF: true
-              DRY_RUN: true
               TARIFFS: "go,agile,flexible"
             envFrom: &envFrom
               - secretRef:
