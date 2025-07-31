@@ -49,15 +49,16 @@ spec:
               - secretRef:
                   name: prowlarr-secret
             probes:
-              liveness:
+              liveness: &probes
                 enabled: true
               readiness:
-                enabled: true
+                enabled: *probes
               startup:
                 enabled: true
                 spec:
-                  failureThreshold: 30
-                  periodSeconds: 5
+                  httpGet:
+                    path: /ping
+                    port: *port
             resources:
               requests:
                 cpu: 18m
