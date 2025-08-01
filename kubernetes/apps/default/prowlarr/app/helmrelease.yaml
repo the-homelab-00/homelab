@@ -50,12 +50,10 @@ spec:
                   name: prowlarr-secret
             probes:
               liveness: &probes
-                enabled: true
+                enabled: false
                 custom: true
                 spec:
-                  httpGet:
-                    path: /ping
-                    port: *port
+                  httpGet: { path: /ping, port: 9696 }
                   initialDelaySeconds: 0
                   periodSeconds: 10
                   timeoutSeconds: 1
