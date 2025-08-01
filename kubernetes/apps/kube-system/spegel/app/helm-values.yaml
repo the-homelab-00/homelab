@@ -1,3 +1,4 @@
+
 ---
 spegel:
   containerdSock: /run/containerd/containerd.sock
@@ -5,3 +6,7 @@ spegel:
 service:
   registry:
     hostPort: 29999
+serviceMonitor:
+  enabled: true
+grafanaDashboard:
+  enabled: true
