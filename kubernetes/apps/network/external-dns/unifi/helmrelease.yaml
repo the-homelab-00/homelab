@@ -62,7 +62,9 @@ spec:
       - --ignore-ingress-tls-spec
     triggerLoopOnEvent: true
     policy: sync
-    sources: ["ingress", "service"]
+    sources:
+      - gateway-httproute
+      - service
     txtOwnerId: main
     txtPrefix: k8s.main.
     domainFilters: ["${SECRET_DOMAIN}"]
