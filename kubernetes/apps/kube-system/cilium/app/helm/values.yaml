@@ -41,6 +41,12 @@ loadBalancer:
   algorithm: maglev
   mode: dsr
 localRedirectPolicy: true
+apiRateLimit:
+  endpoint-create: "rate-limit:400/s,rate-burst:400,parallel-requests:400,auto-adjust:false"
+  endpoint-delete: "rate-limit:400/s,rate-burst:400,parallel-requests:400,auto-adjust:false"
+  endpoint-get: "rate-limit:400/s,rate-burst:400,parallel-requests:400,auto-adjust:false"
+  endpoint-list: "rate-limit:400/s,rate-burst:400,parallel-requests:400,auto-adjust:false"
+  endpoint-patch: "rate-limit:400/s,rate-burst:400,parallel-requests:400,auto-adjust:false"
 operator:
   dashboards:
     enabled: true
