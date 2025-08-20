@@ -31,7 +31,7 @@ spec:
           app:
             image:
               repository: ghcr.io/debridmediamanager/zurg
-              tag: 2025.08.20.0040-nightly@sha256:cfa7b4ec45af96dec7dd9fcbbb9f5e467e64dd619bedfa29c45207f0f74d8d9c
+              tag: 2025.07.29.0047-nightly@sha256:9819fadfcf031515429c0d6966a9d4ad7303f69740b39a43bdbe3f87638734b5
             env:
               TZ: Europe/London
             probes:
