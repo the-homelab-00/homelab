@@ -19,3 +19,4 @@ resources:
   - ./ultrafeeder-adsbexchange/ks.yaml
   - ./sparkle/ks.yaml
   - ./octopus-minmax/ks.yaml
+  - ./aiostreams/ks.yaml
