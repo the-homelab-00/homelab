@@ -20,3 +20,4 @@ resources:
   - ./sparkle/ks.yaml
   - ./octopus-minmax/ks.yaml
   - ./aiostreams/ks.yaml
+  - ./streamthru/ks.yaml
