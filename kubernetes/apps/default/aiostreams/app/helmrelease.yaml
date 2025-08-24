@@ -25,7 +25,7 @@ spec:
           app:
             image:
               repository: ghcr.io/viren070/aiostreams
-              tag: v2.11.0@sha256:7a6819a84f7735c529204b66b157625752967bd5af492ed376e29d9986346b46
+              tag: v2.11.0@sha256:172aaa8dddf064b24efd374feff5fb995f75e87873f4bac9fdb5fa48195e09fc
             env:
               PORT: &port 3000
               LOG_LEVEL: info
