@@ -28,6 +28,7 @@ spec:
               tag: v2.11.0@sha256:7a6819a84f7735c529204b66b157625752967bd5af492ed376e29d9986346b46
             env:
               PORT: &port 3000
+              LOG_LEVEL: info
               DATABASE_URI: sqlite://./data/db.sqlite
               BASE_URL: &url "https://{{ .Release.Name }}.${SECRET_DOMAIN}"
               BUILTIN_STREMTHRU_URL: *url
