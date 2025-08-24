@@ -25,7 +25,7 @@ spec:
           app:
             image:
               repository: ghcr.io/viren070/aiostreams
-              tag: v2.11.0@sha256:172aaa8dddf064b24efd374feff5fb995f75e87873f4bac9fdb5fa48195e09fc
+              tag: 2025.08.24.1629-nightly@sha256:441aa1dfe7c43abcb59c4af818831be6eafea6a4ac94a78814634b8d7b1dbadb
             env:
               PORT: &port 3000
               DATABASE_URI: sqlite://./data/db.sqlite
