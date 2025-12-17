@@ -25,7 +25,7 @@ spec:
           app:
             image:
               repository: muniftanjim/stremthru
-              tag: 0.94.3@sha256:41f5745c7a4afdb73ec481f7006e18e1a00fd67e2100de6f766e6d98a72e3247
+              tag: 0.94.5@sha256:0c80f2d13db8298b6da16f526404b3af0172ac0bbceb908c70ae8db2079b568e
             env:
               STREMTHRU_PORT: &port 8080
               STREMTHRU_BASE_URL: "https://{{ .Release.Name }}.${SECRET_DOMAIN}"
