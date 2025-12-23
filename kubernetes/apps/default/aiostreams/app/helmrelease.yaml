@@ -90,3 +90,7 @@ spec:
         existingClaim: aiostreams-data
         globalMounts:
           - path: /app/data
+      cache:
+        type: emptyDir
+        globalMounts:
+          - path: /home/node/.cache
