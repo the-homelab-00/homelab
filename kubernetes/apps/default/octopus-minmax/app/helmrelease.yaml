@@ -30,6 +30,7 @@ spec:
               TZ: Europe/London
               EXECUTION_TIME: 23:00
               TARIFFS: "agile,flexible,cosy"
+              ONE_OFF: true
             envFrom: &envFrom
               - secretRef:
                   name: octopus-minmax-secret
