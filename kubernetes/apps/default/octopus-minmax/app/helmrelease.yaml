@@ -29,7 +29,7 @@ spec:
             env:
               TZ: Europe/London
               EXECUTION_TIME: 23:00
-              TARIFFS: "agile,flexible,cosy"
+              TARIFFS: "agile,flexible,cosy,go"
               ONE_OFF: true
             envFrom: &envFrom
               - secretRef:
