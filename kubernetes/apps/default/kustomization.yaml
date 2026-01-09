@@ -18,6 +18,6 @@ resources:
   - ./ultrafeeder-fr24/ks.yaml
   - ./ultrafeeder-adsbexchange/ks.yaml
   - ./sparkle/ks.yaml
- # - ./octopus-minmax/ks.yaml
+  - ./octopus-minmax/ks.yaml
   - ./aiostreams/ks.yaml
   - ./stremthru/ks.yaml
