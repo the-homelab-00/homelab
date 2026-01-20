@@ -25,7 +25,7 @@ spec:
           app:
             image:
               repository: eelmafia/octopus-minmax-bot
-              tag: v1.0.7@sha256:c89697b420bb6d6ff946c9584c2f0c9a45adfe4404d99a666ab5095833eb16bc
+              tag: v1.0.8@sha256:4d5a6206d4d5aaab00ba55dd8d519619dfdaecd4be3cf737799d9e709d91374a
             env:
               TZ: Europe/London
               EXECUTION_TIME: 23:00
