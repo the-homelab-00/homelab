@@ -6,7 +6,7 @@ resources:
   # Pre Flux-Kustomizations
   - ./namespace.yaml
   # Flux-Kustomizations
-  # - ./frigate/ks.yaml
+  - ./mcdashboard/ks.yaml
   # - ./slskd/ks.yaml
   - ./minio/ks.yaml
   - ./zurg/ks.yaml
