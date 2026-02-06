@@ -22,10 +22,10 @@ spec:
           app:
             image:
               repository: ghcr.io/the-homelab-00/mcdashboard
-              tag: master@sha256:6af067822bc18ced2fc19b744648eb99bc5c1362dcf2e1fd5d9c1902a6074704
+              tag: master@sha256:7b05d7c65dddcbcb4a2747cb40d5e3b4012224ebf3f36dfdc34e2d1a57355c7d
             env:
               VITE_API_URL: "https://mc.${SECRET_DOMAIN}"
-              VITE_WS_URL: "wss://mc.${SECRET_DOMAIN}"
+              VITE_WS_URL: "wss://mc.${SECRET_DOMAIN}/ws"
               SERVER_IP: "donutsmp.net"
               TZ: Europe/London
             probes:
