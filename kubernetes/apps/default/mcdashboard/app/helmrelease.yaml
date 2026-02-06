@@ -22,7 +22,7 @@ spec:
           app:
             image:
               repository: ghcr.io/the-homelab-00/mcdashboard
-              tag: 2025.08.20.0040-nightly@sha256:dd09d12019e2e578c591ee434f20094b6539226da0f89f0335f85f6ae1c3a638
+              tag: master@sha256:6af067822bc18ced2fc19b744648eb99bc5c1362dcf2e1fd5d9c1902a6074704
             env:
               VITE_API_URL: "https://mc.${SECRET_DOMAIN}"
               VITE_WS_URL: "wss://mc.${SECRET_DOMAIN}"
