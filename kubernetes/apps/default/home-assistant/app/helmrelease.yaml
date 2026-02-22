@@ -109,6 +109,9 @@ spec:
         existingClaim: home-assistant
         globalMounts:
           - path: /config
+      mcdashboard:
+        existingClaim: mcdashboard-data
+          - path: mcdashboard
       zigbee:
         existingClaim: zigbee-config
         globalMounts:
