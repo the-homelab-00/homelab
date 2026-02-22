@@ -111,6 +111,7 @@ spec:
           - path: /config
       mcdashboard:
         existingClaim: mcdashboard-data
+        globalMounts:
           - path: mcdashboard
       zigbee:
         existingClaim: zigbee-config
