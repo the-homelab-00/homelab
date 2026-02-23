@@ -14,9 +14,6 @@ spec:
         name: bjw-s
         namespace: flux-system
   values:
-    defaultPodOptions:
-      hostNetwork: true
-      dnsPolicy: ClusterFirstWithHostNet
     controllers:
       mcdashboard:
         annotations:
