@@ -22,7 +22,7 @@ spec:
           app:
             image:
               repository: ghcr.io/the-homelab-00/mcdashboard
-              tag: master@sha256:15150c350421637e040dcdab09910eb8d3c98ae67393376ccb6fd3477adb58ca
+              tag: master@sha256:a3e44d2671ebfef03f90a607f407842ba094128a94da19ed9e753972c6759c86
             env:
               VITE_API_URL: "https://mc.${SECRET_DOMAIN}"
               VITE_WS_URL: "wss://mc.${SECRET_DOMAIN}/ws"
@@ -43,10 +43,10 @@ spec:
                   httpGet:
                     path: /
                     port: 3001
-             securityContext:
-               allowPrivilegeEscalation: false
-               readOnlyRootFilesystem: false
-               capabilities: { drop: ["ALL"] }
+               securityContext:
+                 allowPrivilegeEscalation: false
+                 readOnlyRootFilesystem: false
+                 capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 10m
