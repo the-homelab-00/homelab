@@ -43,10 +43,10 @@ spec:
                   httpGet:
                     path: /
                     port: 3001
-            # securityContext:
-            #   allowPrivilegeEscalation: false
-            #   readOnlyRootFilesystem: false
-            #   capabilities: { drop: ["ALL"] }
+             securityContext:
+               allowPrivilegeEscalation: false
+               readOnlyRootFilesystem: false
+               capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 10m
