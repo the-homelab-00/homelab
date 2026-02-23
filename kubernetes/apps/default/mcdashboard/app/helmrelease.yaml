@@ -27,7 +27,6 @@ spec:
               VITE_API_URL: "https://mc.${SECRET_DOMAIN}"
               VITE_WS_URL: "wss://mc.${SECRET_DOMAIN}/ws"
               SERVER_IP: "donutsmp.net"
-              DEBUG: "minecraft-protocol,raknet"
               TZ: Europe/London
             probes:
               liveness:
