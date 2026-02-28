@@ -25,7 +25,7 @@ spec:
           app:
             image:
               repository: ghcr.io/viren070/aiostreams
-              tag: v2.24.2@sha256:43825a9847965ab03af8574ae4066c4077be380bdf8703aebfa36b77b43b25a3
+              tag: v2.24.4@sha256:d484ac864692fedd0242804792ba62723df66a63879171ab51b2486b08b5d31d
             env:
               TRUSTED_UUIDS: f4c3156b-c70b-4508-b39d-6f0e24db3d0c
               ALLOWED_REGEX_PATTERNS_URLS: '["https://raw.githubusercontent.com/Vidhin05/Releases-Regex/main/merged-anime-regexes.json", "https://raw.githubusercontent.com/Vidhin05/Releases-Regex/main/merged-regexes.json"]'
