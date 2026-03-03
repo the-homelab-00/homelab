@@ -66,6 +66,8 @@ spec:
               limits:
                 memory: 512Mi
     defaultPodOptions:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
       securityContext:
         runAsNonRoot: true
         runAsUser: 568
