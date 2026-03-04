@@ -27,3 +27,4 @@ wiki
 # Bootstrap
 /config.yaml
 tailscale-config.yaml
+kubernetes/bootstrap/talos/patches/controller/tailscale-auth.yaml
