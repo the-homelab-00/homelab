@@ -10,8 +10,8 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  # dependsOn:
-  #   - name: external-secrets-stores
+  dependsOn:
+    - name: cilium
   path: ./kubernetes/apps/longhorn/longhorn/app
   prune: true
   sourceRef:

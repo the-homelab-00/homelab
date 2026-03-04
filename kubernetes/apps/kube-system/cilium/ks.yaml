@@ -15,6 +15,11 @@ spec:
     kind: GitRepository
     name: home-kubernetes
   wait: true
+  healthChecks:
+  - apiVersion: apps/v1
+    kind: DaemonSet
+    name: cilium
+    namespace: kube-system
   interval: 30m
   timeout: 5m
 ---
