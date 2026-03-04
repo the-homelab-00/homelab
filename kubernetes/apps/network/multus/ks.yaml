@@ -3,43 +3,45 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app cloudnative-pg
-  namespace: flux-system
+  name: multus
 spec:
-  targetNamespace: database
   commonMetadata:
     labels:
-      app.kubernetes.io/name: *app
-  dependsOn:
-    - name: external-secrets-stores
-  path: ./kubernetes//apps/database/cloudnative-pg/app
+      app.kubernetes.io/name: multus
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: multus
+      namespace: network
+  interval: 1h
+  path: "./kubernetes/apps/network/multus/app"
   prune: true
   sourceRef:
     kind: GitRepository
-    name: home-kubernetes
-  wait: true
-  interval: 30m
+    name: flux-system
+    namespace: flux-system
+  targetNamespace: network
   timeout: 5m
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app cloudnative-pg-cluster
-  namespace: flux-system
+  name: multus-networks
 spec:
-  targetNamespace: database
   commonMetadata:
     labels:
-      app.kubernetes.io/name: *app
+      app.kubernetes.io/name: multus
   dependsOn:
-    - name: cloudnative-pg
-    - name: minio
-  path: ./kubernetes//apps/database/cloudnative-pg/cluster
+    - name: multus
+      namespace: flux-system
+  interval: 1h
+  path: "./kubernetes/apps/network/multus/networks"
   prune: true
   sourceRef:
     kind: GitRepository
-    name: home-kubernetes
-  wait: true
-  interval: 30m
+    name: flux-system
+    namespace: flux-system
+  targetNamespace: network
   timeout: 5m
+  wait: true

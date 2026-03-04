@@ -27,5 +27,5 @@ spec:
       GATUS_SUBDOMAIN: zigbee
       VOLSYNC_CAPACITY: 1Gi
       VOLSYNC_ACCESSMODES: ReadWriteMany
-      VOLSYNC_STORAGECLASS: ceph-filesystem
-      VOLSYNC_SNAPSHOTCLASS: csi-ceph-filesystem
+      VOLSYNC_STORAGECLASS: longhorn
+      VOLSYNC_SNAPSHOTCLASS: longhorn-snapshot
