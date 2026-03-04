@@ -27,7 +27,10 @@ spec:
               repository: ghcr.io/viren070/aiostreams
               tag: v2.25.0@sha256:01d7b69beb617ab00a1289c8155f35ae546e34ed1f5140d65fd08d5fd1034e17
             env:
+              TEMPLATE_REFRESH_INTERVAL: 3600
+              WHITELISTED_SYNC_REFRESH_INTERVAL: 3600
               SEL_SYNC_ACCESS: all
+              WHITELISTED_SEL_URLS: ["https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-ESEs-extended.json", "https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-ESEs-standard.json", "https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-ISEs.json", "https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-PSEs.json", "https://raw.githubusercontent.com/Vidhin05/Releases-Regex/main/English/expressions.json", "https://raw.githubusercontent.com/Vidhin05/Releases-Regex/main/German/expressions.json", "https://raw.githubusercontent.com/Vidhin05/Releases-Regex/main/English/legacy-expressions.json"]
               TRUSTED_UUIDS: f4c3156b-c70b-4508-b39d-6f0e24db3d0c
               ALLOWED_REGEX_PATTERNS_URLS: '["https://raw.githubusercontent.com/Vidhin05/Releases-Regex/main/merged-anime-regexes.json", "https://raw.githubusercontent.com/Vidhin05/Releases-Regex/main/merged-regexes.json"]'
               PORT: &port 3000
