@@ -5,6 +5,13 @@ talosVersion: v1.12.4
 # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
 kubernetesVersion: v1.35.2
 
+extensions:
+  officialExtensions:
+    - siderolabs/iscsi-tools
+    - siderolabs/util-linux-tools
+    - siderolabs/tailscale
+    - siderolabs/intel-ucode
+
 clusterName: "home-kubernetes"
 endpoint: https://10.0.0.55:6443
 clusterPodNets:
@@ -24,7 +31,6 @@ nodes:
   - hostname: "home-lab-1"
     ipAddress: "10.0.0.10"
     installDisk: "/dev/sdb"
-    talosImageURL: factory.talos.dev/installer/849080f24057cd90ec04952735767b5b0aa29dae20e5200e031e9d3fc7d58fe0
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
@@ -56,4 +62,5 @@ controlPlane:
     - "@./patches/controller/cluster.yaml"
     - "@./patches/controller/disable-admission-controller.yaml"
     - "@./patches/controller/etcd.yaml"
+    - "@./patches/controller/tailscale-auth.yaml"
 
