@@ -27,6 +27,7 @@ spec:
               repository: ghcr.io/viren070/aiostreams
               tag: v2.25.0@sha256:01d7b69beb617ab00a1289c8155f35ae546e34ed1f5140d65fd08d5fd1034e17
             env:
+              SEL_SYNC_ACCESS: all
               TRUSTED_UUIDS: f4c3156b-c70b-4508-b39d-6f0e24db3d0c
               ALLOWED_REGEX_PATTERNS_URLS: '["https://raw.githubusercontent.com/Vidhin05/Releases-Regex/main/merged-anime-regexes.json", "https://raw.githubusercontent.com/Vidhin05/Releases-Regex/main/merged-regexes.json"]'
               PORT: &port 3000
