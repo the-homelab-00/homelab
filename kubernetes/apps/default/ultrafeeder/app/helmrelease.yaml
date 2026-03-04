@@ -43,16 +43,17 @@ spec:
               TAR1090_PAGETITLE: Ultrafeeder
               TAR1090_PLANECOUNTINTITLE: true
               TAR1090_ENABLE_AC_DB: true
+              READSB_NET_BEAST_REDUCE_INTERVAL: 0.5
               TAR1090_FLIGHTAWARELINKS: true
               TAR1090_SITESHOW: true
               TAR1090_RANGE_OUTLINE_COLORED_BY_ALTITUDE: true
               READSB_ENABLE_BIASTEE: false
-              READSB_GAIN: 40
+              READSB_GAIN: auto
               TAR1090_RANGE_OUTLINE_WIDTH: 2.0
               TAR1090_RANGERINGSDISTANCES: 50,100,150,200
               TAR1090_USEROUTEAPI: ON
-              LOGLEVEL: verbose
-              GPSD_DEBUG: true
+              LOGLEVEL: warning
+              GPSD_DEBUG: false
             envFrom:
               - secretRef:
                   name: ultrafeeder-secret
