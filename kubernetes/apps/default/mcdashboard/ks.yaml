@@ -6,6 +6,8 @@ metadata:
   name: &app mcdashboard
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: storageclass
   targetNamespace: default
   commonMetadata:
     labels:
