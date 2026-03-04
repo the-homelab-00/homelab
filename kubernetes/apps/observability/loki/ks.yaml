@@ -10,6 +10,8 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  dependsOn:
+    - name: storageclass
   path: ./kubernetes//apps/observability/loki/app
   prune: true
   sourceRef:

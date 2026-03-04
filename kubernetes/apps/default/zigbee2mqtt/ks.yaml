@@ -13,6 +13,7 @@ spec:
   dependsOn:
     - name: emqx-cluster
     - name: external-secrets-stores
+    - name: storageclass
   path: ./kubernetes/apps/default/zigbee2mqtt/app
   prune: true
   sourceRef:
