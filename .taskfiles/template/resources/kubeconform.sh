@@ -1,23 +1,39 @@
 #!/usr/bin/env bash
-set -o errexit
-set -o pipefail
+
+set -euo pipefail
 
 KUBERNETES_DIR=$1
 
-[[ -z "${KUBERNETES_DIR}" ]] && echo "Kubernetes location not specified" && exit 1
+# Check if Kubernetes directory is specified
+if [[ -z "${KUBERNETES_DIR}" ]]; then
+  echo "Kubernetes location not specified"
+  exit 1
+fi
 
 kustomize_args=("--load-restrictor=LoadRestrictionsNone")
 kustomize_config="kustomization.yaml"
 kubeconform_args=(
+<<<<<<<< HEAD:scripts/kubeconform.sh
+  "-strict"
+  "-ignore-missing-schemas"
+  "-skip"
+  "Gateway,HTTPRoute,Secret,ReplicationDestination,ReplicationSource"
+  "-schema-location"
+  "default"
+  "-schema-location"
+  "https://kubernetes-schemas.pages.dev/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json"
+  "-verbose"
+========
     "-strict"
     "-ignore-missing-schemas"
     "-skip"
-    "Secret"
+    "Gateway,HTTPRoute,Secret"
     "-schema-location"
     "default"
     "-schema-location"
     "https://kubernetes-schemas.pages.dev/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json"
     "-verbose"
+>>>>>>>> upstream/main:.taskfiles/template/resources/kubeconform.sh
 )
 
 echo "=== Validating standalone manifests in ${KUBERNETES_DIR}/flux ==="
@@ -48,3 +64,4 @@ do
         exit 1
     fi
 done
+
