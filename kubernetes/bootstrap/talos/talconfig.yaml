@@ -5,12 +5,6 @@ talosVersion: v1.12.4
 # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
 kubernetesVersion: v1.35.2
 
-extensions:
-  officialExtensions:
-    - siderolabs/iscsi-tools
-    - siderolabs/util-linux-tools
-    - siderolabs/tailscale
-    - siderolabs/intel-ucode
 
 clusterName: "home-kubernetes"
 endpoint: https://10.0.0.55:6443
@@ -32,9 +26,18 @@ nodes:
     ipAddress: "10.0.0.10"
     installDisk: "/dev/sdb"
     controlPlane: true
+    machineSpec:
+      secureboot: true
+    schematic:
+      customization:
+        systemExtensions:
+          officialExtensions:
+            - siderolabs/iscsi-tools
+            - siderolabs/util-linux-tools
+            - siderolabs/amd-ucode
     networkInterfaces:
       - deviceSelector:
-          hardwareAddr: "90:e2:ba:56:b7:d0"
+          hardwareAddr: "d8:bb:c1:0a:6e:7b"
         dhcp: false
         addresses:
           - "10.0.0.10/24"
