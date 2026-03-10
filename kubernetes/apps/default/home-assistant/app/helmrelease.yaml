@@ -79,13 +79,13 @@ spec:
     route:
       app:
         hostnames:
-          - hass.${SECRET_DOMAIN}
+          - "hass.${SECRET_DOMAIN}"
         parentRefs:
           - name: envoy-external
             namespace: network
       code-server:
         hostnames:
-          - hass-code.${SECRET_DOMAIN}
+          - "hass-code.${SECRET_DOMAIN}"
         parentRefs:
           - name: envoy-external
             namespace: network
