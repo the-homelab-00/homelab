@@ -4,9 +4,9 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app longhorn
-  namespace: long-horn
+  namespace: longhorn-system
 spec:
-  targetNamespace: long-horn
+  targetNamespace: longhorn-system
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
@@ -27,9 +27,9 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app storageclass
-  namespace: long-horn
+  namespace: longhorn-system
 spec:
-  targetNamespace: long-horn
+  targetNamespace: longhorn-system
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
