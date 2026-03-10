@@ -31,6 +31,7 @@ spec:
 
       - diskID: "node-storage"  # You may use the identifier part for clarity
         path: "/dev/disk/by-id/wwn-0x5000c50032b9a931"
+        diskType: "block"
     defaultSettings:
       createDefaultDiskLabeledNodes: true
       defaultDataLocality: "best-effort"
