@@ -6,3 +6,4 @@ resources:
   - ./helmrelease.yaml
   - ./onepassword.secret.sops.yaml
   - ./clustersecretstore.yaml
+  - ./ocirepository.yaml
