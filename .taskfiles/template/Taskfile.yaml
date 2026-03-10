@@ -13,7 +13,7 @@ tasks:
   :init:
     desc: Initialize configuration files
     cmds:
-      - task: generate-template-config
+      #- task: generate-template-config
       - task: generate-age-key
       - task: generate-deploy-key
       - task: generate-push-token
