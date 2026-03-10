@@ -12,7 +12,8 @@ spec:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: emqx-cluster
-    - name: external-secrets-stores
+    - name: onepassword
+      namespace: external-secrets
     - name: storageclass
   path: ./kubernetes/apps/default/zigbee2mqtt/app
   prune: true
