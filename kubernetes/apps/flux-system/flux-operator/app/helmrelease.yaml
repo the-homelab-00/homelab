@@ -11,3 +11,23 @@ spec:
   values:
     serviceMonitor:
       create: true
+    web:
+      enabled: true
+
+
+    route:
+      app:
+        hostnames:
+          - "flux.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+            sectionName: https
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+            backendRefs:
+              - name: flux-operator
+                port: 9080 # Default port for the Flux Operator Web UI
