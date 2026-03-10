@@ -27,7 +27,7 @@ nodes:
     installDisk: "/dev/sdb"
     controlPlane: true
     machineSpec:
-      secureboot: true
+      secureboot: false
     schematic:
       customization:
         systemExtensions:

@@ -1,23 +1,11 @@
 ---
-# yaml-language-server: $schema=https://json.schemastore.org/kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: default
+
+components:
+  - ../../components/sops
+
 resources:
-  # Pre Flux-Kustomizations
   - ./namespace.yaml
-  # Flux-Kustomizations
-  - ./mcdashboard/ks.yaml
-  # - ./slskd/ks.yaml
-  - ./minio/ks.yaml
-  - ./zurg/ks.yaml
-  - ./prowlarr/ks.yaml
-  - ./zigbee2mqtt/ks.yaml
-  - ./bifrost/ks.yaml
-  - ./home-assistant/ks.yaml
-  - ./ultrafeeder/ks.yaml
-  - ./ultrafeeder-fr24/ks.yaml
-  - ./ultrafeeder-adsbexchange/ks.yaml
-  - ./sparkle/ks.yaml
-  - ./octopus-minmax/ks.yaml
-  - ./aiostreams/ks.yaml
-  - ./stremthru/ks.yaml
+  - ./echo/ks.yaml
