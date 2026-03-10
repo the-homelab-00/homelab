@@ -43,13 +43,13 @@ spec:
       orphanAutoDeletion: true
     longhornUI:
       replicas: *replicas
-    ingress:
-      enabled: true
-      ingressClassName: internal
-      annotations:
-        external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
-      host: longhorn.${SECRET_DOMAIN}
-      tls: true
+    route:
+      app:
+        hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+            sectionName: https
     metrics:
       serviceMonitor:
         enabled: true
