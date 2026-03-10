@@ -19,7 +19,7 @@ spec:
       retries: 3
   values:
     spdk:
-      enabled: true
+      enabled: false
     csi:
       attacherReplicaCount: &replicas 1
       provisionerReplicaCount: *replicas
