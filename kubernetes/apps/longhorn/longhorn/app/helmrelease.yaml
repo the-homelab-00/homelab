@@ -33,8 +33,8 @@ spec:
         path: "/dev/disk/by-id/wwn-0x5000c50032b9a931"
     defaultSettings:
       createDefaultDiskLabeledNodes: true
-      defaultDataLocality: true
-      replicaAutoBalance: true
+      defaultDataLocality: "best-effort"
+      replicaAutoBalance: "best-effort"
       storageMinimalAvailablePercentage: 1
       storageReservedPercentageForDefaultDisk: 10
       defaultLonghornStaticStorageClass: longhorn
