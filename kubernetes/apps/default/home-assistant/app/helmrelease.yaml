@@ -78,14 +78,12 @@ spec:
             port: 12321
     route:
       app:
-        hostnames:
-          - "hass.${SECRET_DOMAIN}"
+        hostnames: ["hass.${SECRET_DOMAIN}"]
         parentRefs:
           - name: envoy-external
             namespace: network
       code-server:
-        hostnames:
-          - "hass-code.${SECRET_DOMAIN}"
+        hostnames: ["hass-code.${SECRET_DOMAIN}"]
         parentRefs:
           - name: envoy-external
             namespace: network
