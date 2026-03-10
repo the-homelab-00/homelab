@@ -29,7 +29,7 @@ spec:
       defaultClassReplicaCount: 1
       disks:
 
-      - diskID: "node-storage"  # You may use the identifier part for clarity
+      - diskID: "node-storage-v2"  # You may use the identifier part for clarity
         path: "/dev/sdb"
         diskType: "block"
     defaultSettings:
