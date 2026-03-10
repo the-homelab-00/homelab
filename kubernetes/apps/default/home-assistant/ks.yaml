@@ -15,6 +15,7 @@ spec:
     - name: onepassword
       namespace: external-secrets
     - name: storageclass
+      namespace: long-horn
   path: ./kubernetes/apps/default/home-assistant/app
   prune: true
   sourceRef:
