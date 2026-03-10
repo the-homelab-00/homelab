@@ -92,18 +92,6 @@ spec:
         existingClaim: home-assistant
         globalMounts:
           - path: /config
-      mcdashboard:
-        existingClaim: mcdashboard-data
-        globalMounts:
-          - path: mcdashboard
-      zigbee:
-        existingClaim: zigbee-config
-        globalMounts:
-          - path: /zigbee
-      bifrost:
-        existingClaim: bifrost-persistence
-        globalMounts:
-          - path: /bifrost
       logs:
         type: emptyDir
         globalMounts:
@@ -116,3 +104,16 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /tmp
+      # mcdashboard:
+      #   existingClaim: mcdashboard-data
+      #   globalMounts:
+      #     - path: mcdashboard
+      # zigbee:
+      #   existingClaim: zigbee-config
+      #   globalMounts:
+      #     - path: /zigbee
+      # bifrost:
+      #   existingClaim: bifrost-persistence
+      #   globalMounts:
+      #     - path: /bifrost
+
