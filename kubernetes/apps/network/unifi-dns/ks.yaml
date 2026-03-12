@@ -5,6 +5,10 @@ kind: Kustomization
 metadata:
   name: unifi-dns
 spec:
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
   interval: 1h
   path: ./kubernetes/apps/network/unifi-dns/app
   prune: true
