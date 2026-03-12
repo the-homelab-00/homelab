@@ -45,7 +45,7 @@ spec:
     txtOwnerId: main
     txtPrefix: k8s.main.
     domainFilters:
-      - turbo.ac
+      - ${SECRET_DOMAIN}
     serviceMonitor:
       enabled: true
     podAnnotations:
