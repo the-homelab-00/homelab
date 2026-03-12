@@ -10,10 +10,6 @@ spec:
   hostnames:
     - "emqx.${SECRET_DOMAIN}"
   rules:
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /
-      backendRefs:
+    - backendRefs:
         - name: emqx-dashboard
           port: 18083
