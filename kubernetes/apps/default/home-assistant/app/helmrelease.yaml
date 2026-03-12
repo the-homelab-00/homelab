@@ -96,6 +96,10 @@ spec:
         existingClaim: home-assistant
         globalMounts:
           - path: /config
+      config-cache:
+        existingClaim: home-assistant-cache
+        globalMounts:
+          - path: /config/.venv
       logs:
         type: emptyDir
         globalMounts:
@@ -108,10 +112,6 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /tmp
-      config-cache:
-        existingClaim: "home-assistant-cache"
-        globalMounts:
-          - path: /config/.venv
       # mcdashboard:
       #   existingClaim: mcdashboard-data
       #   globalMounts:
