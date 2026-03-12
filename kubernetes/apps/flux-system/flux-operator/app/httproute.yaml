@@ -8,7 +8,7 @@ spec:
   parentRefs:
     - name: envoy-internal
       namespace: network
-      sectionName: http-web # Ensure this matches your Gateway listener name
+      sectionName: https
   hostnames: ["flux.${SECRET_DOMAIN}"]
   rules:
     - matches:
