@@ -6,6 +6,10 @@ metadata:
   name: &app emqx
   namespace: database
 spec:
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
   targetNamespace: database
   commonMetadata:
     labels:
@@ -30,6 +34,10 @@ metadata:
   name: &app emqx-cluster
   namespace: database
 spec:
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
   targetNamespace: database
   commonMetadata:
     labels:
