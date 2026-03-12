@@ -98,7 +98,7 @@ spec:
             port: *port
     route:
       app:
-        hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
+        hostnames: ["zigbee.${SECRET_DOMAIN}"]
         parentRefs:
           - name: envoy-internal
             namespace: network
