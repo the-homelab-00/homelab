@@ -79,12 +79,8 @@ spec:
       app:
         hostnames: ["hass.${SECRET_DOMAIN}"]
         parentRefs:
-          - name: envoy-external
+          - name: envoy-internal
             namespace: network
-        rules:
-          - backendRefs:
-              - name: app
-                port: 8123
       # code-server:
       #   hostnames: ["hass-code.${SECRET_DOMAIN}"]
       #   parentRefs:
