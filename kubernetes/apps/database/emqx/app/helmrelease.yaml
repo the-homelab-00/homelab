@@ -22,5 +22,6 @@ spec:
       namespace: cert-manager
   values:
     fullnameOverride: emqx-operator
+    installCRDs: true
     image:
       repository: ghcr.io/emqx/emqx-operator
