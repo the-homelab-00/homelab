@@ -6,6 +6,10 @@ metadata:
   name: &app zigbee2mqtt
 spec:
   targetNamespace: default
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
