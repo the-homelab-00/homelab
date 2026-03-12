@@ -72,7 +72,6 @@ spec:
         controller: home-assistant
         ports:
           http:
-            appProtocol: kubernetes.io/ws
             port: 8123
           code-server:
             port: 12321
