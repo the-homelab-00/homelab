@@ -19,7 +19,7 @@ spec:
         parentRefs:
           - name: envoy-internal
             namespace: network
-            sectionName: https
+            sectionName: http-web
         rules:
           - matches:
               - path:
