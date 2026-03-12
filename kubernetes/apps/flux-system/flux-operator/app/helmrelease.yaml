@@ -13,18 +13,3 @@ spec:
       create: true
     web:
       enabled: true
-    route:
-      http-web:
-        hostnames: ["flux.${SECRET_DOMAIN}"]
-        parentRefs:
-          - name: envoy-internal
-            namespace: network
-            sectionName: http-web
-        rules:
-          - matches:
-              - path:
-                  type: PathPrefix
-                  value: /
-            backendRefs:
-              - name: flux-operator
-                port: 9080 # Default port for the Flux Operator Web UI
