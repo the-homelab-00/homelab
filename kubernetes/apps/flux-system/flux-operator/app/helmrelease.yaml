@@ -13,10 +13,8 @@ spec:
       create: true
     web:
       enabled: true
-
-
     route:
-      app:
+      http-web:
         hostnames:
           - "flux.${SECRET_DOMAIN}"
         parentRefs:
