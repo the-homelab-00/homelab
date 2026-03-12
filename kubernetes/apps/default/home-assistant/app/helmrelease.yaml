@@ -108,6 +108,10 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /tmp
+      config-cache:
+        existingClaim: "home-assistant-cache"
+        globalMounts:
+          - path: /config/.venv
       # mcdashboard:
       #   existingClaim: mcdashboard-data
       #   globalMounts:
