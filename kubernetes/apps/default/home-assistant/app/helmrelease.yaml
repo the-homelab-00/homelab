@@ -69,13 +69,10 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
-        controller: home-assistant
         ports:
           http:
             appProtocol: kubernetes.io/ws
             port: 8123
-          code-server:
-            port: 12321
     route:
       app:
         hostnames: ["hass.${SECRET_DOMAIN}"]
