@@ -15,8 +15,7 @@ spec:
       enabled: true
     route:
       http-web:
-        hostnames:
-          - "flux.${SECRET_DOMAIN}"
+        hostnames: ["flux.${SECRET_DOMAIN}"]
         parentRefs:
           - name: envoy-internal
             namespace: network
