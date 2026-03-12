@@ -12,6 +12,10 @@ spec:
     - name: topolvm
       namespace: topolvm-system
   path: ./kubernetes/apps/default/home-assistant/app
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
   prune: true
   sourceRef:
     kind: GitRepository
