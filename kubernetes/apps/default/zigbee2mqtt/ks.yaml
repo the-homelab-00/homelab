@@ -6,10 +6,6 @@ metadata:
   name: &app zigbee2mqtt
 spec:
   targetNamespace: default
-  postBuild:
-    substituteFrom:
-      - name: cluster-secrets
-        kind: Secret
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
@@ -30,6 +26,9 @@ spec:
   interval: 30m
   timeout: 5m
   postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
     substitute:
       APP: *app
       GATUS_SUBDOMAIN: zigbee
