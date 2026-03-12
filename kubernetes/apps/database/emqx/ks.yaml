@@ -6,10 +6,6 @@ metadata:
   name: &app emqx
   namespace: database
 spec:
-  postBuild:
-    substituteFrom:
-      - name: cluster-secrets
-        kind: Secret
   targetNamespace: database
   commonMetadata:
     labels:
@@ -38,10 +34,6 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  postBuild:
-    substituteFrom:
-      - name: cluster-secrets
-        kind: Secret
   dependsOn:
     - name: emqx
   path: ./kubernetes//apps/database/emqx/cluster
