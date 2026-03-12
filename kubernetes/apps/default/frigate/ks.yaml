@@ -15,7 +15,8 @@ spec:
     - name: onepassword
       namespace: external-secrets
     - name: node-feature-discovery-rules
-    - name: storageclass
+    - name: topolvm
+      namespace: topolvm-system
   path: ./kubernetes/apps/default/frigate/app
   prune: true
   sourceRef:

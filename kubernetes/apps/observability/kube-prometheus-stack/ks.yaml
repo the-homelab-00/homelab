@@ -13,7 +13,8 @@ spec:
   dependsOn:
     - name: onepassword
       namespace: external-secrets
-    - name: storageclass
+    - name: topolvm
+      namespace: topolvm-system
     - name: prometheus-operator-crds
   path: ./kubernetes//apps/observability/kube-prometheus-stack/app
   prune: true

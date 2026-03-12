@@ -13,7 +13,8 @@ spec:
     - name: emqx-cluster
     - name: onepassword
       namespace: external-secrets
-    - name: storageclass
+    - name: topolvm
+      namespace: topolvm-system
   path: ./kubernetes/apps/default/zigbee2mqtt/app
   prune: true
   sourceRef:
