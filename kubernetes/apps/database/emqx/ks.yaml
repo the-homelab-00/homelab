@@ -6,6 +6,10 @@ metadata:
   name: &app emqx
   namespace: flux-system
 spec:
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
   targetNamespace: database
   commonMetadata:
     labels:
