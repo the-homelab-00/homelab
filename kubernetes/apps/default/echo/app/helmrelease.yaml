@@ -19,6 +19,7 @@ spec:
               tag: 39
             env:
               HTTP_PORT: &port 80
+              ECHO_BACK_TO_CLIENT: false
               LOG_WITHOUT_NEWLINE: true
               LOG_IGNORE_PATH: /healthz
               PROMETHEUS_ENABLED: true
