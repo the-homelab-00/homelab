@@ -13,7 +13,7 @@ spec:
   path: ./kubernetes/apps/topolvm-system/topolvm/app
   dependsOn:
     - name: snapshot-controller
-      namespace: flux-system
+      namespace: kube-system
   prune: true
   sourceRef:
     kind: GitRepository
