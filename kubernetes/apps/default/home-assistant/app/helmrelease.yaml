@@ -44,22 +44,22 @@ spec:
                 cpu: 10m
               limits:
                 memory: 2Gi
-          code-server:
-            image:
-              repository: ghcr.io/coder/code-server
-              tag: 4.109.5@sha256:f9ccfeb5a3de80d16342a6a842519c481522d80aafe65fb24a16393235a34f71
-            args: [
-              "--auth", "none",
-              "--user-data-dir", "/config/.vscode",
-              "--extensions-dir", "/config/.vscode",
-              "--port", "12321",
-              "/config"
-            ]
-            resources:
-              requests:
-                cpu: 10m
-              limits:
-                memory: 512Mi
+          # code-server:
+          #   image:
+          #     repository: ghcr.io/coder/code-server
+          #     tag: 4.109.5@sha256:f9ccfeb5a3de80d16342a6a842519c481522d80aafe65fb24a16393235a34f71
+          #   args: [
+          #     "--auth", "none",
+          #     "--user-data-dir", "/config/.vscode",
+          #     "--extensions-dir", "/config/.vscode",
+          #     "--port", "12321",
+          #     "/config"
+          #   ]
+          #   resources:
+          #     requests:
+          #       cpu: 10m
+          #     limits:
+          #       memory: 512Mi
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
