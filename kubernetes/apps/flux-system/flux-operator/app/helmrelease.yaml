@@ -13,4 +13,4 @@ spec:
       create: true
     web:
       enabled: true
-      configSecret: "flux-web-config-secret"
+      configSecretName: "flux-web-config-secret"
