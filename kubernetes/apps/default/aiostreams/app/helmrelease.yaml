@@ -37,7 +37,7 @@ spec:
               PORT: &port 3000
               LOG_LEVEL: info
               DATABASE_URI: sqlite://./data/db.sqlite
-              BASE_URL: &url "https://{{ .Release.Name }}.${SECRET_DOMAIN}"
+              BASE_URL: &url "https://aiostreams.${SECRET_DOMAIN}"
               BUILTIN_STREMTHRU_URL: *url
             envFrom: &envFrom
               - secretRef:
@@ -80,7 +80,7 @@ spec:
             port: *port
     route:
       app:
-        hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
+        hostnames: [*url]
         parentRefs:
           - name: envoy-external
             namespace: network
