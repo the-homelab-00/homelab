@@ -21,6 +21,10 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
   wait: false
   interval: 30m
   timeout: 5m
