@@ -80,7 +80,7 @@ spec:
             port: *port
     route:
       app:
-        hostnames: [*url]
+        hostnames: ["aiostreams.${SECRET_DOMAIN}"]
         parentRefs:
           - name: envoy-external
             namespace: network
