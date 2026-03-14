@@ -6,5 +6,6 @@ kind: Kustomization
 resources:
   - ./externalsecret.yaml
   - ./helmrelease.yaml
+  - ./ocirepository.yaml
   - ../../../../templates/gatus/guarded
   - ./pvc.yaml
