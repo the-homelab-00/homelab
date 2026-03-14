@@ -10,7 +10,7 @@ pull_request_rules:
 queue_rules:
   - name: dep-update
     merge_method: squash
-    batch_size: 5
+    batch_size: 20
     batch_max_wait_time: 15 min
     queue_conditions:
       - author = renovate[bot]
