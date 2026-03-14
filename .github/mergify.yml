@@ -2,29 +2,19 @@ pull_request_rules:
   - name: Automatically queue Renovate PRs
     conditions:
       - author = renovate[bot]
-      - check-success = Flux Diff (kubernetes, helmrelease)
-      - check-success = Flux Diff (kubernetes, kustomization)
-      # Optional: Only automerge non-major updates to reduce risk
-      - "-title ~= ^upgrade .* to v[0-9]+\\." 
-      # Optional: Ensure no "manual" label is present
-      - label != manual-review
+      - "check-success = Flux Diff (kubernetes, helmrelease)"
+      - "check-success = Flux Diff (kubernetes, kustomization)"
     actions:
       queue:
         name: dep-update
-        # Ensure the PR is up to date with main before merging
-        method: squash
 
 queue_rules:
   - name: dep-update
-    # Smaller batches isolate failures faster without nuking 10 PRs at once
+    merge_method: squash
     batch_size: 5
     batch_max_wait_time: 15 min
-    # Allow multiple batches to run in parallel to speed up throughput
-    max_parallel_checks: 2
     queue_conditions:
       - author = renovate[bot]
-    # Requirements for the final 'merged' state
     merge_conditions:
-      - check-success = Flux Diff (kubernetes, helmrelease)
-      - check-success = Flux Diff (kubernetes, kustomization)
-      
+      - "check-success = Flux Diff (kubernetes, helmrelease)"
+      - "check-success = Flux Diff (kubernetes, kustomization)"
