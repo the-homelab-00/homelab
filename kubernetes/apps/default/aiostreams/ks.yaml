@@ -21,14 +21,13 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  postBuild:
-    substituteFrom:
-      - name: cluster-secrets
-        kind: Secret
   wait: false
   interval: 30m
   timeout: 5m
   postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
     substitute:
       APP: *app
       APP_UID: "2000"
