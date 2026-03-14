@@ -78,7 +78,7 @@ spec:
         ports:
           http:
             port: *port
-   route:
+    route:
       app:
         hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
         parentRefs:
