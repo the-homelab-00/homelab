@@ -2,8 +2,7 @@ pull_request_rules:
   - name: Automatically queue Renovate PRs
     conditions:
       - author = renovate[bot]
-      - "check-success = Flux Diff (kubernetes, helmrelease)"
-      - "check-success = Flux Diff (kubernetes, kustomization)"
+      - "check-success = Flux Local Success"
     actions:
       queue:
         name: dep-update
@@ -16,5 +15,4 @@ queue_rules:
     queue_conditions:
       - author = renovate[bot]
     merge_conditions:
-      - "check-success = Flux Diff (kubernetes, helmrelease)"
-      - "check-success = Flux Diff (kubernetes, kustomization)"
+      - "check-success = Flux Local Success"
