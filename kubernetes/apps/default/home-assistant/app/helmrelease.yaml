@@ -77,7 +77,7 @@ spec:
       app:
         hostnames: ["hass.${SECRET_DOMAIN}"]
         parentRefs:
-          - name: envoy-internal
+          - name: envoy-external
             namespace: network
       # code-server:
       #   hostnames: ["hass-code.${SECRET_DOMAIN}"]
