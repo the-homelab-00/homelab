@@ -17,12 +17,10 @@ spec:
           "ipam": {
             "type": "static",
             "routes": [
-              {"dst": "0.0.0.0/0", "gw": "10.0.1.1"}
+              { "dst": "10.0.1.0/24" }
             ]
           }
         },
-        {
-          "type": "sbr"
-        }
+        { "type": "sbr" }
       ]
     }
