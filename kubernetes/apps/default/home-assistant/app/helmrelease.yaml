@@ -64,10 +64,9 @@ spec:
       annotations:
         k8s.v1.cni.cncf.io/networks: |-
           [{
-            "name": "iot",
+            "name": "multus-iot",
             "namespace": "network",
             "ips": ["10.0.1.10/24"],
-            "mac": "c6:07:27:af:fb:53"
           }]
       securityContext:
         runAsNonRoot: true
