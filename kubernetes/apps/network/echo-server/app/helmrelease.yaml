@@ -27,13 +27,13 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/mendhak/http-https-echo
-              tag: 39
+              repository: hashicorp/http-echo
+              tag: latest
+            args:
+              - "-text=ok"
+              - "-listen=:8080"
             env:
               HTTP_PORT: &port 8080
-              LOG_WITHOUT_NEWLINE: true
-              LOG_IGNORE_PATH: /healthz
-              PROMETHEUS_ENABLED: true
             probes:
               liveness: &probes
                 enabled: true
