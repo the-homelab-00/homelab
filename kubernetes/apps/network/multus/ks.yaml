@@ -34,7 +34,7 @@ spec:
       app.kubernetes.io/name: multus
   dependsOn:
     - name: multus
-      namespace: flux-system
+      namespace: networks
   interval: 1h
   path: "./kubernetes/apps/network/multus/networks"
   prune: true
