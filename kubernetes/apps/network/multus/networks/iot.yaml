@@ -13,7 +13,6 @@ spec:
         {
           "type": "ipvlan",
           "master": "bond0.2",
-          "mode": "bridge",
           "ipam": {
             "type": "static",
             "routes": [
