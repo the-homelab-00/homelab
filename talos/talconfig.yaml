@@ -20,15 +20,18 @@ cniConfig:
 nodes:
   - hostname: "home-lab-1"
     ipAddress: "10.0.0.10"
-    installDisk: "/dev/sdb"
+    installDisk: "/dev/sda"
     machineSpec:
       secureboot: false
     talosImageURL: factory.talos.dev/installer/714c82d7736b918256b9c4d2415c9473786328facfa4205d4f7ef77e48020081
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
-          hardwareAddr: "90:e2:ba:56:b7:d0"
+          hardwareAddr: "d8:bb:c1:0a:6e:7a"
         dhcp: false
+        vlans:
+          - vlanId: 2
+          - vlanId: 3
         addresses:
           - "10.0.0.10/24"
         routes:
@@ -47,6 +50,8 @@ nodes:
               - name: nvidia_uvm
               - name: nvidia_drm
               - name: nvidia_modeset
+              - name: dm_thin_pool
+              - name: dm_mod
 
 # Global patches
 patches:
