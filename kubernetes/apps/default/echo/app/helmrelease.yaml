@@ -18,7 +18,7 @@ spec:
               repository: ghcr.io/mendhak/http-https-echo
               tag: 39
             env:
-              HTTP_PORT: &port 80
+              HTTP_PORT: &port 8080
               ECHO_BACK_TO_CLIENT: false
               LOG_WITHOUT_NEWLINE: true
               LOG_IGNORE_PATH: /healthz
