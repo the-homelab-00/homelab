@@ -26,7 +26,7 @@ spec:
           app:
             image:
               repository: ghcr.io/viren070/aiostreams
-              tag: v2.29.6@sha256:4585357ad5f7969934badf4114fbbc006dcf258570f9e320fc831b8c3ab95871
+              tag: v2.30.3@sha256:537e6a79c452b2951c6f5c4296b9976c61b84dd40ed8354ef587dd975f65d7b7
             env:
               TEMPLATE_URLS: '["https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/Tamtaro-All-Templates-for-AIOStreams.json", "https://raw.githubusercontent.com/Vidhin05/Releases-Regex/refs/heads/main/all-templates.json"]'
               TEMPLATE_REFRESH_INTERVAL: 3600
