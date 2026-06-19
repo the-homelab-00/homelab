@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nvidia-powersave
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      app: nvidia-powersave
+  template:
+    metadata:
+      labels:
+        app: nvidia-powersave
+    spec:
+      hostPID: true
+      containers:
+      - name: nvidia
+        image: nvidia/cuda:12.6.0-base-ubuntu24.04
+        command:
+        - sh
+        - -c
+        - |
+          nvidia-smi -pm 1
+          nvidia-smi -pl 15
+          echo "Persistence mode on, power limit set to 15W"
+          sleep infinity
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: dev
+          mountPath: /dev
+      volumes:
+      - name: dev
+        hostPath:
+          path: /dev
