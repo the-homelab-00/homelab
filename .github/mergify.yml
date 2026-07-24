@@ -16,3 +16,5 @@ queue_rules:
       - author = renovate[bot]
     merge_conditions:
       - "check-success = Flux Local Success"
+merge_protections_settings:
+  reporting_method: check-runs
