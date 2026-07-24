@@ -13,7 +13,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: backube
-        namespace: flux-system
+        namespace: volsync-system
   install:
     remediation:
       retries: 3
