@@ -14,7 +14,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: grafana
-        namespace: flux-system
+        namespace: observability
   install:
     crds: Skip
     remediation:
