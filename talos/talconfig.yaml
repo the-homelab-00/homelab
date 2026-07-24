@@ -23,17 +23,21 @@ nodes:
     installDisk: "/dev/sda"
     machineSpec:
       secureboot: false
-    talosImageURL: factory.talos.dev/installer/714c82d7736b918256b9c4d2415c9473786328facfa4205d4f7ef77e48020081
+    talosImageURL: factory.talos.dev/installer/b2e2b6e5789248edb9f2812f8b7f2d0e791ad4b6960debf9a6d431865c45bb64
     controlPlane: true
     networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "d8:bb:c1:0a:6e:7a"
-        dhcp: false
-        vlans:
-          - vlanId: 2
-          - vlanId: 3
+      - interface: bond0
+        bond:
+          interfaces:
+            - enp42s0
+          mode: active-backup
+        dhcp: true
         addresses:
           - "10.0.0.10/24"
+        vlans:
+          - vlanId: 2
+            addresses:
+            - 10.0.1.5/24
         routes:
           - gateway: "10.0.0.1"
             network: 0.0.0.0/0
@@ -57,9 +61,11 @@ nodes:
 patches:
   - "@./patches/global/machine-files.yaml"
   - "@./patches/global/machine-kubelet.yaml"
+  - "@./patches/global/machine-lldpd.yaml"
   - "@./patches/global/machine-network.yaml"
   - "@./patches/global/machine-sysctls.yaml"
   - "@./patches/global/machine-time.yaml"
+  - "@./patches/global/optimize.yaml"
 
 # Controller patches
 controlPlane:

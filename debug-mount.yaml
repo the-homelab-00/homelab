@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: devcontainer
+  namespace: default
+spec:
+  containers:
+  - name: devcontainer
+    image: mcr.microsoft.com/devcontainers/universal:latest
+    command: ["/bin/sh", "-c", "sleep 1d"]
+    securityContext:
+      privileged: true  # Necessary for mounting block devices
+    volumeMounts:
+    - mountPath: /dev
+      name: host-dev
+  volumes:
+  - name: host-dev
+    hostPath:
+      path: /dev
+  nodeName: home-lab-1  # Ensure it lands on the node with sdb

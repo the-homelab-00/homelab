@@ -33,6 +33,6 @@ spec:
       APP: *app
       GATUS_SUBDOMAIN: zigbee
       VOLSYNC_CAPACITY: 1Gi
-      VOLSYNC_ACCESSMODES: ReadWriteMany
-      VOLSYNC_STORAGECLASS: longhorn
-      VOLSYNC_SNAPSHOTCLASS: longhorn-snapshot
+      VOLSYNC_ACCESSMODES: ReadWriteOnce
+      VOLSYNC_STORAGECLASS: topolvm-thin-provisioner
+      VOLSYNC_SNAPSHOTCLASS: topolvm-thin-provisioner

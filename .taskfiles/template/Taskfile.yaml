@@ -79,7 +79,6 @@ tasks:
       - which cue
 
   render-configs:
-    internal: true
     cmd: makejinja
     env:
       PYTHONDONTWRITEBYTECODE: '1'
