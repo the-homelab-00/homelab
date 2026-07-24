@@ -1,0 +1,139 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: aiometadata
+spec:
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: aiometadata
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    controllers:
+      aiometadata:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/jigsawfr/aiometadata-docker
+              tag: 2.8.0@sha256:f70efcfd4a822e78164b91adf1c8db6642e49fdfe24c96a6010dd02b0a038d8a
+            env:
+              PORT: &port 3232
+              NODE_ENV: production
+              LOG_LEVEL: info
+              TZ: America/New_York
+              HOST_NAME: "https://aiometadata.${SECRET_DOMAIN}"
+              DATABASE_URI: sqlite://addon/data/db.sqlite
+              REDIS_URL: redis://aiometadata-redis:6379
+            envFrom:
+              - secretRef:
+                  name: aiometadata-secret
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: *port
+                  initialDelaySeconds: 40
+                  periodSeconds: 30
+                  timeoutSeconds: 10
+                  failureThreshold: 3
+              readiness: *probes
+            resources:
+              requests:
+                cpu: 20m
+                memory: 256Mi
+              limits:
+                memory: 2Gi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+      redis:
+        containers:
+          app:
+            image:
+              repository: docker.io/library/redis
+              tag: 8.8.1-alpine@sha256:8096655e437712b07503796fb64d81359256cfcff0ab29d95a7da72863786efb
+            command: ["redis-server", "--appendonly", "yes", "--save", "3600", "1"]
+            probes:
+              liveness: &redisProbes
+                enabled: true
+                custom: true
+                spec:
+                  exec:
+                    command: ["redis-cli", "ping"]
+                  initialDelaySeconds: 10
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 5
+              readiness: *redisProbes
+            resources:
+              requests:
+                cpu: 10m
+                memory: 64Mi
+              limits:
+                memory: 512Mi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+    service:
+      app:
+        controller: aiometadata
+        ports:
+          http:
+            port: *port
+      redis:
+        controller: redis
+        ports:
+          redis:
+            port: 6379
+    route:
+      app:
+        hostnames: ["aiometadata.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: envoy-external
+            namespace: network
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: http
+    persistence:
+      data:
+        existingClaim: aiometadata-data
+        advancedMounts:
+          aiometadata:
+            app:
+              - path: /app/addon/data
+      tmp:
+        type: emptyDir
+        advancedMounts:
+          aiometadata:
+            app:
+              - path: /tmp
+      cache:
+        existingClaim: aiometadata-cache
+        advancedMounts:
+          redis:
+            app:
+              - path: /data
