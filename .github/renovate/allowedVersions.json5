@@ -12,12 +12,13 @@
       "allowedVersions": "<17"
     },
     {
-      // emqx-operator 2.3.x dropped EMQX 5.8.x support and breaks the OSS
-      // broker's readiness gate (emqx/emqx-operator#1202). Raise this only
-      // together with the EMQX image in emqx/cluster/cluster.yaml.
+      // emqx-operator and the EMQX image are version-coupled: 2.3.x supports
+      // only EMQX 5.9/5.10/6.x, and 2.2.x cannot be restored once 2.3.x has
+      // added the v2 CRD version (emqx/emqx-operator#1202). Bump the operator
+      // only together with the image in emqx/cluster/cluster.yaml.
       "matchDatasources": ["helm"],
       "matchPackageNames": ["emqx-operator"],
-      "allowedVersions": "<2.3.0"
+      "enabled": false
     }
   ]
 }
