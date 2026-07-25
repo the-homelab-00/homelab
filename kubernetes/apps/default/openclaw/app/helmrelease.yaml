@@ -102,9 +102,6 @@ spec:
               # exec'd directly rather than through a shell, so .bashrc never
               # applies. Without this the anthropic plugin cannot find claude.
               PATH: /home/node/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-              # Keeps Claude Code's auth/settings (normally ~/.claude and
-              # ~/.claude.json, both on the read-only image layer) on the PVC.
-              CLAUDE_CONFIG_DIR: /home/node/.openclaw/claude
             envFrom:
               - secretRef:
                   name: openclaw-secret
@@ -203,14 +200,14 @@ spec:
               - path: /home/node/.openclaw
             app:
               - path: /home/node/.openclaw
-      local:
-        existingClaim: openclaw-local
+      home:
+        existingClaim: openclaw-home
         advancedMounts:
           openclaw:
             install-claude:
-              - path: /home/node/.local
+              - path: /home/node
             app:
-              - path: /home/node/.local
+              - path: /home/node
       seed:
         type: configMap
         identifier: config
