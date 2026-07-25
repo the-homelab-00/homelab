@@ -67,6 +67,9 @@ spec:
               OPENCLAW_CONFIG_PATH: /home/node/.openclaw/openclaw.json
               OPENCLAW_WORKSPACE_DIR: /home/node/.openclaw/workspace
               OPENCLAW_DISABLE_BONJOUR: "1"
+            envFrom:
+              - secretRef:
+                  name: openclaw-secret
             probes:
               liveness:
                 enabled: true
