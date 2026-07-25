@@ -131,7 +131,8 @@ spec:
             resources:
               requests:
                 cpu: 250m
-                memory: 512Mi
+                # Was 512Mi against a ~724Mi working set.
+                memory: 768Mi
               limits:
                 memory: 2Gi
             securityContext:

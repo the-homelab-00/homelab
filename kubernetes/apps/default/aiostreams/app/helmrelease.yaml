@@ -59,7 +59,10 @@ spec:
             resources:
               requests:
                 cpu: 18m
-                memory: 128Mi
+                # Was 128Mi against a ~565Mi working set; under-requesting
+                # misleads the scheduler and makes this a first eviction
+                # candidate under node memory pressure.
+                memory: 640Mi
               limits:
                 memory: "3Gi"
             securityContext:
