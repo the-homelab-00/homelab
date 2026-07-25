@@ -9,21 +9,16 @@ spec:
   chart:
     spec:
       chart: emqx-operator
-      # KNOWN BROKEN with this broker, but pinned here deliberately.
-      #
-      # 2.3.x supports only EMQX 5.9/5.10/6.x; this cluster runs OSS 5.8.9. It
-      # calls the enterprise-only /api/v5/load_rebalance/global_status every
-      # reconcile, gets HTTP 404, and aborts before setting the
-      # apps.emqx.io/on-serving readiness gate (emqx/emqx-operator#1202). The
-      # core pod stays Ready=False and emqx-listeners has no endpoints, so
-      # clients route via the emqx-direct Service instead (see
-      # ../cluster/service-direct.yaml).
-      #
-      # Downgrading to 2.2.29 is blocked: its CRD lacks the v2 version 2.3.x
-      # added, and the API server refuses to drop a version still in
-      # status.storedVersions. Fixing that needs a CRD storage migration back
-      # to v2beta1, or moving the broker to an EMQX Enterprise build.
-      version: 2.3.2
+      # Do not raise past 2.2.x while the broker is EMQX 5.8.x. 2.3.x supports
+      # only EMQX 5.9/5.10/6.x and calls the enterprise-only
+      # /api/v5/load_rebalance/global_status every reconcile; against an OSS
+      # 5.8 node that 404s and aborts the status reconcile, so the
+      # apps.emqx.io/on-serving readiness gate is never set. The core pod then
+      # stays Ready=False, emqx-listeners loses every endpoint, and all MQTT
+      # clients fail with ECONNREFUSED.
+      # See emqx/emqx-operator#1202 (closed as expected behaviour).
+      # Requires skipCRDs below to be downgradeable at all.
+      version: 2.2.29
       sourceRef:
         kind: HelmRepository
         name: emqx
@@ -40,6 +35,16 @@ spec:
     - name: cert-manager
       namespace: cert-manager
   values:
+    # This chart renders its CRDs from templates/ (there is no crds/ dir), so
+    # Helm applies them on every upgrade. Downgrading to 2.2.x otherwise fails
+    # because its CRD omits the v2 version 2.3.x added, and the API server
+    # refuses to drop a version still listed in status.storedVersions.
+    #
+    # Leaving the 2.3.x CRD in place is safe here: spec.conversion.strategy is
+    # None, so the object stored as apps.emqx.io/v2 is served unchanged as
+    # v2beta1, which is what operator 2.2.x watches and what cluster.yaml
+    # already declares.
+    skipCRDs: true
     fullnameOverride: emqx-operator
     image:
       repository: ghcr.io/emqx/emqx-operator
