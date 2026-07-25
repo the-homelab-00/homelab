@@ -35,16 +35,11 @@ spec:
     - name: cert-manager
       namespace: cert-manager
   values:
-    # This chart renders its CRDs from templates/ (there is no crds/ dir), so
-    # Helm applies them on every upgrade. Downgrading to 2.2.x otherwise fails
-    # because its CRD omits the v2 version 2.3.x added, and the API server
-    # refuses to drop a version still listed in status.storedVersions.
-    #
-    # Leaving the 2.3.x CRD in place is safe here: spec.conversion.strategy is
-    # None, so the object stored as apps.emqx.io/v2 is served unchanged as
-    # v2beta1, which is what operator 2.2.x watches and what cluster.yaml
-    # already declares.
-    skipCRDs: true
+    # NEVER set skipCRDs on an existing release. This chart renders its CRDs
+    # from templates/, so Helm owns them; turning skipCRDs on removes them from
+    # the rendered manifest and Helm prunes them on the next upgrade. Deleting
+    # a CRD cascades to every CR of that type, which took out the EMQX object,
+    # its StatefulSet and its PVCs.
     fullnameOverride: emqx-operator
     image:
       repository: ghcr.io/emqx/emqx-operator
