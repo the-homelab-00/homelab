@@ -10,3 +10,19 @@ spec:
     requests:
       storage: 10Gi
   storageClassName: topolvm-thin-provisioner
+---
+# Holds the Claude Code native install (/home/node/.local/bin/claude and
+# .local/share/claude). /home/node itself is an image layer and the container
+# runs with readOnlyRootFilesystem, so without this the installer has nowhere
+# to write and the binary would not survive pod replacement.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: openclaw-local
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: topolvm-thin-provisioner

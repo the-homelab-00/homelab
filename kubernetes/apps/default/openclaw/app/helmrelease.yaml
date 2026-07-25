@@ -51,6 +51,37 @@ spec:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
+          # Installs the Claude Code CLI so the bundled anthropic plugin can use
+          # the claude-cli backend instead of an API key. Must run on the
+          # openclaw image, not busybox: the installer fetches a native glibc
+          # binary and busybox is musl. Skipped once the binary is on the volume.
+          install-claude:
+            image:
+              repository: ghcr.io/openclaw/openclaw
+              tag: 2026.7.1@sha256:6a31d44b2944e7adcd2b582bf6fb463111264ebca97a0201795b799135bd102c
+            command:
+              - sh
+              - -c
+              - |
+                set -eu
+                if [ -x /home/node/.local/bin/claude ]; then
+                  echo "claude already installed"
+                  exit 0
+                fi
+                curl -fsSL https://claude.ai/install.sh | bash
+                test -x /home/node/.local/bin/claude
+            env:
+              HOME: /home/node
+            resources:
+              requests:
+                cpu: 50m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
         containers:
           app:
             image:
@@ -67,6 +98,13 @@ spec:
               OPENCLAW_CONFIG_PATH: /home/node/.openclaw/openclaw.json
               OPENCLAW_WORKSPACE_DIR: /home/node/.openclaw/workspace
               OPENCLAW_DISABLE_BONJOUR: "1"
+              # The image does not put ~/.local/bin on PATH, and the gateway is
+              # exec'd directly rather than through a shell, so .bashrc never
+              # applies. Without this the anthropic plugin cannot find claude.
+              PATH: /home/node/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+              # Keeps Claude Code's auth/settings (normally ~/.claude and
+              # ~/.claude.json, both on the read-only image layer) on the PVC.
+              CLAUDE_CONFIG_DIR: /home/node/.openclaw/claude
             envFrom:
               - secretRef:
                   name: openclaw-secret
@@ -165,6 +203,14 @@ spec:
               - path: /home/node/.openclaw
             app:
               - path: /home/node/.openclaw
+      local:
+        existingClaim: openclaw-local
+        advancedMounts:
+          openclaw:
+            install-claude:
+              - path: /home/node/.local
+            app:
+              - path: /home/node/.local
       seed:
         type: configMap
         identifier: config
@@ -176,5 +222,7 @@ spec:
         type: emptyDir
         advancedMounts:
           openclaw:
+            install-claude:
+              - path: /tmp
             app:
               - path: /tmp
