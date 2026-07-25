@@ -10,6 +10,14 @@
       "matchDatasources": ["docker"],
       "matchPackagePatterns": ["postgresql"],
       "allowedVersions": "<17"
+    },
+    {
+      // emqx-operator 2.3.x dropped EMQX 5.8.x support and breaks the OSS
+      // broker's readiness gate (emqx/emqx-operator#1202). Raise this only
+      // together with the EMQX image in emqx/cluster/cluster.yaml.
+      "matchDatasources": ["helm"],
+      "matchPackageNames": ["emqx-operator"],
+      "allowedVersions": "<2.3.0"
     }
   ]
 }

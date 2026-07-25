@@ -9,7 +9,15 @@ spec:
   chart:
     spec:
       chart: emqx-operator
-      version: 2.3.2
+      # Do not upgrade past 2.2.x while the broker is EMQX 5.8.x. Operator 2.3.x
+      # supports only EMQX 5.9/5.10/6.x and calls the enterprise-only
+      # /api/v5/load_rebalance/global_status on every reconcile; against an OSS
+      # 5.8 node that 404s and aborts the status reconcile, so the
+      # apps.emqx.io/on-serving readiness gate is never set. The core pod then
+      # stays NotReady, emqx-listeners loses all endpoints, and every MQTT
+      # client (zigbee2mqtt) fails with ECONNREFUSED.
+      # See emqx/emqx-operator#1202 (closed as expected behaviour).
+      version: 2.2.29
       sourceRef:
         kind: HelmRepository
         name: emqx
