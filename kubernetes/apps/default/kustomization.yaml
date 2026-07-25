@@ -13,3 +13,4 @@ resources:
   - ./zigbee2mqtt/ks.yaml
   - ./aiostreams/ks.yaml
   - ./aiometadata/ks.yaml
+  - ./openclaw/ks.yaml
