@@ -6,4 +6,3 @@ resources:
   - ./cluster.yaml
   - ./ingress.yaml
   - ./podmonitor.yaml
-  - ./service-direct.yaml
