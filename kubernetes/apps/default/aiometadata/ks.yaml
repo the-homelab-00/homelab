@@ -3,20 +3,19 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app zigbee2mqtt
+  name: &app aiometadata
+  namespace: default
 spec:
   targetNamespace: default
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
-    - name: emqx-cluster
-      namespace: database
     - name: onepassword
       namespace: external-secrets
     - name: topolvm
       namespace: topolvm-system
-  path: ./kubernetes/apps/default/zigbee2mqtt/app
+  path: ./kubernetes/apps/default/aiometadata/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -31,8 +30,3 @@ spec:
         kind: Secret
     substitute:
       APP: *app
-      GATUS_SUBDOMAIN: zigbee
-      VOLSYNC_CAPACITY: 1Gi
-      VOLSYNC_ACCESSMODES: ReadWriteOnce
-      VOLSYNC_STORAGECLASS: topolvm-thin-provisioner
-      VOLSYNC_SNAPSHOTCLASS: topolvm-thin-provisioner

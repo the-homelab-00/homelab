@@ -1,0 +1,4 @@
+machine:
+  udev:
+    rules:
+      - ACTION=="add", SUBSYSTEM=="block", KERNEL=="sd[a-z]", RUN+="/sbin/hdparm -B 127 -S 241 /dev/%k"

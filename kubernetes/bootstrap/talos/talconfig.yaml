@@ -28,6 +28,7 @@ nodes:
     controlPlane: true
     machineSpec:
       secureboot: false
+    talosImageURL: factory.talos.dev/installer/b2e2b6e5789248edb9f2812f8b7f2d0e791ad4b6960debf9a6d431865c45bb64
     schematic:
       customization:
         systemExtensions:
@@ -35,6 +36,7 @@ nodes:
             - siderolabs/iscsi-tools
             - siderolabs/util-linux-tools
             - siderolabs/amd-ucode
+            - siderolabs/lldpd
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "d8:bb:c1:0a:6e:7a"
@@ -55,6 +57,7 @@ patches:
   - "@./patches/global/disable-search-domain.yaml"
   - "@./patches/global/hostdns.yaml"
   - "@./patches/global/kubelet.yaml"
+  - "@./patches/global/lldpd.yaml"
   - "@./patches/global/openebs-local.yaml"
   - "@./patches/global/sysctl.yaml"
 

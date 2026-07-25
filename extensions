@@ -4,3 +4,4 @@ customization:
             - siderolabs/intel-ucode
             - siderolabs/iscsi-tools
             - siderolabs/tailscale
+            - siderolabs/lldpd

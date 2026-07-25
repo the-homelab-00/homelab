@@ -11,6 +11,3 @@ spec:
   values:
     serviceMonitor:
       create: true
-    web:
-      enabled: true
-      configSecretName: "flux-web-config-secret"
