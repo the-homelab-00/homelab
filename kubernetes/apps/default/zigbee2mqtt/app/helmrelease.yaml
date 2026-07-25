@@ -54,7 +54,11 @@ spec:
               ZIGBEE2MQTT_CONFIG_MQTT_INCLUDE_DEVICE_INFORMATION: "true"
               ZIGBEE2MQTT_CONFIG_MQTT_KEEPALIVE: 60
               ZIGBEE2MQTT_CONFIG_MQTT_REJECT_UNAUTHORIZED: "true"
-              ZIGBEE2MQTT_CONFIG_MQTT_SERVER: mqtt://emqx-listeners.database.svc.cluster.local:1883
+              # emqx-direct instead of emqx-listeners: the operator-managed
+              # Service has no endpoints while the emqx-operator 2.3.x /
+              # EMQX 5.8 mismatch leaves the readiness gate unset. Point back
+              # at emqx-listeners once that is resolved.
+              ZIGBEE2MQTT_CONFIG_MQTT_SERVER: mqtt://emqx-direct.database.svc.cluster.local:1883
               ZIGBEE2MQTT_CONFIG_MQTT_VERSION: 5
               ZIGBEE2MQTT_CONFIG_PERMIT_JOIN: "false"
               ZIGBEE2MQTT_CONFIG_SERIAL_BAUDRATE: 115200

@@ -1,0 +1,46 @@
+---
+# Routing bypass for the operator-managed emqx-listeners Service.
+#
+# emqx-operator 2.3.x is incompatible with this OSS 5.8.x broker: every
+# reconcile calls the enterprise-only /api/v5/load_rebalance/global_status,
+# gets HTTP 404, and aborts before setting the apps.emqx.io/on-serving
+# readiness gate (emqx/emqx-operator#1202). The core pod therefore stays
+# Ready=False even though EMQX itself is started and serving, which empties
+# emqx-listeners' endpoints and makes every MQTT client fail ECONNREFUSED.
+#
+# publishNotReadyAddresses lets this Service route to the pod regardless of
+# that readiness gate. Same selector and ports as emqx-listeners.
+#
+# This is a stopgap. Remove it once the operator/broker version mismatch is
+# resolved (revert to operator 2.2.x via CRD storage migration, or move the
+# broker to an EMQX Enterprise build that serves the load_rebalance API).
+apiVersion: v1
+kind: Service
+metadata:
+  name: emqx-direct
+  labels:
+    app.kubernetes.io/name: emqx-direct
+spec:
+  type: ClusterIP
+  publishNotReadyAddresses: true
+  selector:
+    apps.emqx.io/db-role: core
+    apps.emqx.io/instance: emqx
+    apps.emqx.io/managed-by: emqx-operator
+  ports:
+    - name: tcp-default
+      port: 1883
+      targetPort: 1883
+      protocol: TCP
+    - name: ssl-default
+      port: 8883
+      targetPort: 8883
+      protocol: TCP
+    - name: ws-default
+      port: 8083
+      targetPort: 8083
+      protocol: TCP
+    - name: wss-default
+      port: 8084
+      targetPort: 8084
+      protocol: TCP
