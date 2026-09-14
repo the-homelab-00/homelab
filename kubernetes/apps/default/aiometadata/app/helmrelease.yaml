@@ -31,7 +31,7 @@ spec:
               # Upstream cuts no 2.x semver tags; this dated tag is git
               # revision 2ab3239 — the same source as jigsawfr's 2.8.0.
               repository: ghcr.io/cedya77/aiometadata
-              tag: v.testing.20260706.3@sha256:ded3372d23649387a1dea41b3162a6868e1125a9ed6c1abaee94225b2a404344
+              tag: jellyfin-233aad1269d1b981433510cc09753c1a7200de4a
             env:
               PORT: &port 3232
               NODE_ENV: production
