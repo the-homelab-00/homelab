@@ -23,9 +23,6 @@ spec:
       - --crd-source-apiversion=externaldns.k8s.io/v1alpha1
       - --crd-source-kind=DNSEndpoint
       - --gateway-name=envoy-external
-      # v0.23 ignores external-dns.alpha.kubernetes.io/* (incl. the envoy-external
-      # Gateway's target) without this; drop once annotations use external-dns.kubernetes.io/
-      - --enable-legacy-annotation-prefix
     triggerLoopOnEvent: true
     policy: sync
     sources: ["crd", "gateway-httproute"]
