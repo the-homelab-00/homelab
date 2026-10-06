@@ -26,7 +26,7 @@ spec:
           app:
             image:
               repository: ghcr.io/thepotato97/roblox-click-log
-              tag: sha-4e6b569@sha256:669316690f27f8f855ecf93e513b6f99965eed4abfb0fb192dc760a379a20213
+              tag: sha-3fbb166@sha256:cf62e2d993258cb77145660d9414dca7cf905d8e5ef6fc0b5ec00bcaee7a5241
             env:
               HOST: 0.0.0.0
               PORT: &port 8787
@@ -48,17 +48,6 @@ spec:
                   timeoutSeconds: 5
                   failureThreshold: 3
               readiness: *probes
-              # first start after an upgrade may run a one-time purge; give it 10 min
-              startup:
-                enabled: true
-                custom: true
-                spec:
-                  httpGet:
-                    path: /health
-                    port: *port
-                  periodSeconds: 10
-                  timeoutSeconds: 5
-                  failureThreshold: 60
             resources:
               requests:
                 cpu: 250m
