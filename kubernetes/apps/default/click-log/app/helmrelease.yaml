@@ -25,10 +25,8 @@ spec:
         containers:
           app:
             image:
-              # node:sqlite needs Node >= 22.13
-              repository: docker.io/library/node
-              tag: 22.21.1-alpine
-            command: ["node", "--disable-warning=ExperimentalWarning", "/app/src/server.mjs"]
+              repository: ghcr.io/thepotato97/roblox-click-log
+              tag: main
             env:
               HOST: 0.0.0.0
               PORT: &port 8787
