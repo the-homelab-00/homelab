@@ -26,7 +26,7 @@ spec:
           app:
             image:
               repository: ghcr.io/thepotato97/roblox-click-log
-              tag: sha-632b014@sha256:a377b958cb60828137170c945b2218bc527635abf41fe22cdd1fa27efc65903a
+              tag: sha-9b39980@sha256:b66f9d9ea92aed7d32f375bbde80c3ad16d4089770881a41ddd9276d53d6ed6c
             env:
               HOST: 0.0.0.0
               PORT: &port 8787
@@ -50,10 +50,10 @@ spec:
               readiness: *probes
             resources:
               requests:
-                cpu: 100m
-                memory: 256Mi
+                cpu: 250m
+                memory: 512Mi
               limits:
-                memory: 1Gi
+                memory: 2Gi
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
