@@ -14,3 +14,4 @@ resources:
   - ./aiostreams/ks.yaml
   - ./aiometadata/ks.yaml
   - ./openclaw/ks.yaml
+  - ./click-log/ks.yaml
