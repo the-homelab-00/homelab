@@ -1,0 +1,100 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: click-log
+spec:
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: click-log
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    controllers:
+      click-log:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              # node:sqlite needs Node >= 22.13
+              repository: docker.io/library/node
+              tag: 22.21.1-alpine
+            command: ["node", "--disable-warning=ExperimentalWarning", "/app/src/server.mjs"]
+            env:
+              HOST: 0.0.0.0
+              PORT: &port 8787
+              DB_PATH: /data/clicks.db
+              TZ: Europe/London
+            envFrom:
+              - secretRef:
+                  name: click-log-secret
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: *port
+                  initialDelaySeconds: 5
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+              readiness: *probes
+            resources:
+              requests:
+                cpu: 10m
+                memory: 64Mi
+              limits:
+                memory: 512Mi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+    service:
+      app:
+        controller: click-log
+        ports:
+          http:
+            port: *port
+    route:
+      app:
+        hostnames: ["clicks.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: envoy-external
+            namespace: network
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: http
+    persistence:
+      data:
+        existingClaim: click-log-data
+        globalMounts:
+          - path: /data
+      src:
+        type: configMap
+        name: click-log-src
+        globalMounts:
+          - path: /app/src
+            readOnly: true
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp

@@ -1,0 +1,21 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ./externalsecret.yaml
+  - ./helmrelease.yaml
+  - ./ocirepository.yaml
+  - ./pvc.yaml
+# Server source copied from pandora-studio-r/ColorFillGame click-log-server/src
+# (Node built-ins only, no npm deps). Fixed name so the HelmRelease can mount
+# it; reloader restarts the pod when it changes.
+configMapGenerator:
+  - name: click-log-src
+    files:
+      - ./src/server.mjs
+      - ./src/db.mjs
+      - ./src/journeys.mjs
+      - ./src/analyze.mjs
+generatorOptions:
+  disableNameSuffixHash: true
