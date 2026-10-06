@@ -19,3 +19,6 @@ configMapGenerator:
       - ./src/analyze.mjs
 generatorOptions:
   disableNameSuffixHash: true
+  annotations:
+    # the JS uses `${...}` template literals; keep Flux postBuild envsubst off them
+    kustomize.toolkit.fluxcd.io/substitute: disabled
