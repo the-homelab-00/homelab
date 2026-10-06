@@ -26,7 +26,7 @@ spec:
           app:
             image:
               repository: ghcr.io/thepotato97/roblox-click-log
-              tag: main
+              tag: sha-76c05c9@sha256:c5c89d41db4c0ef1710b0cfb13869b78f098de91148157ca9b203ae1c71fa2c2
             env:
               HOST: 0.0.0.0
               PORT: &port 8787
@@ -86,12 +86,6 @@ spec:
         existingClaim: click-log-data
         globalMounts:
           - path: /data
-      src:
-        type: configMap
-        name: click-log-src
-        globalMounts:
-          - path: /app/src
-            readOnly: true
       tmp:
         type: emptyDir
         globalMounts:
