@@ -10,3 +10,15 @@ spec:
     requests:
       storage: 10Gi
   storageClassName: topolvm-thin-provisioner
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: click-log-clickhouse
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+  storageClassName: topolvm-thin-provisioner

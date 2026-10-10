@@ -7,3 +7,9 @@ resources:
   - ./helmrelease.yaml
   - ./ocirepository.yaml
   - ./pvc.yaml
+configMapGenerator:
+  - name: click-log-clickhouse
+    files:
+      - clickhouse.xml=./resources/clickhouse.xml
+generatorOptions:
+  disableNameSuffixHash: true
