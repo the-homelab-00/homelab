@@ -1,0 +1,30 @@
+<!-- Mounted over the image's docker_related_config.xml, which listens on every
+     address: only the click-log container in the same pod talks to it. -->
+<clickhouse>
+    <listen_host>127.0.0.1</listen_host>
+    <logger>
+        <level>warning</level>
+        <console>1</console>
+        <log remove="1"/>
+        <errorlog remove="1"/>
+    </logger>
+    <mark_cache_size>268435456</mark_cache_size>
+    <!-- system log tables keep everything by default; keep a month of queries, drop the rest -->
+    <query_log>
+        <ttl>event_date + INTERVAL 30 DAY DELETE</ttl>
+    </query_log>
+    <trace_log remove="1"/>
+    <text_log remove="1"/>
+    <metric_log remove="1"/>
+    <asynchronous_metric_log remove="1"/>
+    <latency_log remove="1"/>
+    <error_log remove="1"/>
+    <query_metric_log remove="1"/>
+    <part_log remove="1"/>
+    <asynchronous_insert_log remove="1"/>
+    <query_thread_log remove="1"/>
+    <query_views_log remove="1"/>
+    <blob_storage_log remove="1"/>
+    <processors_profile_log remove="1"/>
+    <opentelemetry_span_log remove="1"/>
+</clickhouse>

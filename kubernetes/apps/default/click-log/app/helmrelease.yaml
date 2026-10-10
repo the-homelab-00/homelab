@@ -30,7 +30,6 @@ spec:
             env:
               HOST: 0.0.0.0
               PORT: &port 8787
-              DB_PATH: /data/clicks.db
               TZ: Europe/London
               IMAGE: *tag
             envFrom:
@@ -56,9 +55,30 @@ spec:
               limits:
                 memory: 4Gi
             securityContext:
-              allowPrivilegeEscalation: false
+              allowPrivilegeEscalation: &noesc false
               readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
+              capabilities: &nocaps { drop: ["ALL"] }
+          # the events store; listens on 127.0.0.1 only (resources/clickhouse.xml)
+          clickhouse:
+            image:
+              repository: clickhouse/clickhouse-server
+              tag: 25.8.33.6@sha256:0152dd511befe6a2c2ef53e930726179669b08116da78500b37c51c96ff5ee77
+            # straight to the server: the image's entrypoint writes user config into /etc
+            command: ["/usr/bin/clickhouse", "server", "--config-file=/etc/clickhouse-server/config.xml"]
+            probes:
+              liveness: { enabled: false }
+              readiness: { enabled: false }
+              startup: { enabled: false }
+            resources:
+              requests:
+                cpu: 250m
+                memory: 512Mi
+              limits:
+                memory: 3Gi
+            securityContext:
+              allowPrivilegeEscalation: *noesc
+              readOnlyRootFilesystem: true
+              capabilities: *nocaps
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -83,10 +103,34 @@ spec:
               - identifier: app
                 port: http
     persistence:
+      # the old SQLite log, read once by `bun src/migrate.mjs /data/clicks.db`
       data:
         existingClaim: click-log-data
-        globalMounts:
-          - path: /data
+        advancedMounts:
+          click-log:
+            app:
+              - path: /data
+      clickhouse:
+        existingClaim: click-log-clickhouse
+        advancedMounts:
+          click-log:
+            clickhouse:
+              - path: /var/lib/clickhouse
+      clickhouse-config:
+        type: configMap
+        name: click-log-clickhouse
+        advancedMounts:
+          click-log:
+            clickhouse:
+              - path: /etc/clickhouse-server/config.d/docker_related_config.xml
+                subPath: clickhouse.xml
+                readOnly: true
+      clickhouse-logs:
+        type: emptyDir
+        advancedMounts:
+          click-log:
+            clickhouse:
+              - path: /var/log/clickhouse-server
       tmp:
         type: emptyDir
         globalMounts:
