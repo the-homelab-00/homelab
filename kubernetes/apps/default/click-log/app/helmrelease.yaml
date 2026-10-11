@@ -26,7 +26,7 @@ spec:
           app:
             image:
               repository: ghcr.io/thepotato97/roblox-click-log
-              tag: &tag sha-76a22d6@sha256:231c81b60bb4c71a79fb17e0dafeb88cd34c8fe89d2bf25905467a03ac58dabd
+              tag: &tag sha-dfbccb1@sha256:8739069478c46120896bede72f36517199ea496b9020a1680da32e9433a89e76
             env:
               HOST: 0.0.0.0
               PORT: &port 8787
