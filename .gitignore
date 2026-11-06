@@ -8,6 +8,7 @@ talosconfig
 .decrypted~*.yaml
 .secret.env
 .secret.yaml
+secrets.yaml
 .config.env
 *.agekey
 *.pub
@@ -43,6 +44,7 @@ Brewfile.lock.json
 .idea
 # wiki
 wiki
+rotate-talos.log
 # Bootstrap
 /config.yaml
 tailscale-config.yaml
