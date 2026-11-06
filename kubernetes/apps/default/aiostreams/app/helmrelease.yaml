@@ -25,8 +25,9 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/viren070/aiostreams
-              tag: v2.37@sha256:bcfd8580695a50c8f464578a0e25af065f3bd17eac35ed82a733a18342ca9718
+              # Fork with guest watch parties (ThePotato97/AIOStreams, feat/guest-watch-together)
+              repository: ghcr.io/thepotato97/aiostreams
+              tag: guest-watch-together@sha256:98d06bc40b641db9b1aaeda30a6478ec887e9c3d5165629ac3ba690c9de60a94
             env:
               TEMPLATE_URLS: '["https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/Tamtaro-All-Templates-for-AIOStreams.json", "https://raw.githubusercontent.com/Vidhin05/Releases-Regex/refs/heads/main/all-templates.json"]'
               TEMPLATE_REFRESH_INTERVAL: 3600
