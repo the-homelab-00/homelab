@@ -27,7 +27,7 @@ spec:
             image:
               # Fork with guest watch parties (ThePotato97/AIOStreams, feat/guest-watch-together)
               repository: ghcr.io/thepotato97/aiostreams
-              tag: guest-watch-together@sha256:2a6c08604218350a44e35e6b23fc21be9e87acb9f15bcae7379b68862f8cf910
+              tag: guest-watch-together@sha256:c92c79b9b9afea0737a8bf3009f5e378dd1d77ec4f21cc8dae041b12dd8da5dd
             env:
               TEMPLATE_URLS: '["https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/Tamtaro-All-Templates-for-AIOStreams.json", "https://raw.githubusercontent.com/Vidhin05/Releases-Regex/refs/heads/main/all-templates.json"]'
               TEMPLATE_REFRESH_INTERVAL: 3600
