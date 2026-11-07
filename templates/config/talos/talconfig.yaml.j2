@@ -32,7 +32,7 @@ nodes:
     #% endif %#
     machineSpec:
       secureboot: #{ (true if item.secureboot else false) | string | lower }#
-    talosImageURL: factory.talos.dev/installer#{ "-secureboot" if item.secureboot | default(false, true) }#/#{ item.schematic_id }#
+    talosImageURL: factory.talos.dev/metal-installer#{ "-secureboot" if item.secureboot | default(false, true) }#/#{ item.schematic_id }#
     controlPlane: #{ (item.controller) | string | lower }#
     networkInterfaces:
       - deviceSelector:

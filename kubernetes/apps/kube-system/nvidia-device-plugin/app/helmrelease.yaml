@@ -1,0 +1,21 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: nvidia-device-plugin
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: nvidia-device-plugin
+      version: 0.20.1
+      sourceRef:
+        kind: HelmRepository
+        name: nvidia-device-plugin
+  values:
+    # Run through the Talos NVIDIA container runtime (see runtimeclass.yaml).
+    runtimeClassName: nvidia
+    # The chart only schedules onto nodes labelled by Node Feature Discovery,
+    # which is not deployed here. null (not {}) drops the default affinity.
+    affinity: null
