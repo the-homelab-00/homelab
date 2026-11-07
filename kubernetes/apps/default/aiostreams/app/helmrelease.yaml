@@ -25,8 +25,9 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/viren070/aiostreams
-              tag: v2.37@sha256:bcfd8580695a50c8f464578a0e25af065f3bd17eac35ed82a733a18342ca9718
+              # Fork with guest watch parties (ThePotato97/AIOStreams, feat/guest-watch-together)
+              repository: ghcr.io/thepotato97/aiostreams
+              tag: guest-watch-together@sha256:98d06bc40b641db9b1aaeda30a6478ec887e9c3d5165629ac3ba690c9de60a94
             env:
               TEMPLATE_URLS: '["https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/Tamtaro-All-Templates-for-AIOStreams.json", "https://raw.githubusercontent.com/Vidhin05/Releases-Regex/refs/heads/main/all-templates.json"]'
               TEMPLATE_REFRESH_INTERVAL: 3600
@@ -40,9 +41,16 @@ spec:
               DATABASE_URI: sqlite://./data/db.sqlite
               BASE_URL: &url "https://aiostreams.${SECRET_DOMAIN}"
               BUILTIN_STREMTHRU_URL: *url
+              # Guest watch parties: browser guests, with FFmpeg in the
+              # transcoder controller below. Both URLs stay inside the cluster.
+              PARTY_GUEST_STREAMING: "true"
+              PARTY_TRANSCODER_URL: http://aiostreams-transcoder:3100
+              PARTY_INTERNAL_URL: http://aiostreams:3000
             envFrom: &envFrom
               - secretRef:
                   name: aiostreams-secret
+              - secretRef:
+                  name: aiostreams-transcoder-secret
             probes:
               liveness: &probes
                 enabled: true
@@ -69,6 +77,57 @@ spec:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
+      transcoder:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        pod:
+          # NVENC through the Talos NVIDIA container runtime.
+          runtimeClassName: nvidia
+        containers:
+          app:
+            image:
+              repository: ghcr.io/thepotato97/aiostreams-transcoder
+              tag: guest-watch-together@sha256:ff828f13cd555fb5c69fcdfada7ba0e4ceefad269fd2e91ffd08aa46caec703a
+            env:
+              PORT: &transcoderPort 3100
+              AIOSTREAMS_INTERNAL_URL: http://aiostreams:3000
+              CACHE_DIR: /cache
+              # Falls back to CPU by itself if NVENC fails to start.
+              TRANSCODER_ENCODER: nvidia
+              NVIDIA_DRIVER_CAPABILITIES: compute,video,utility
+              TRANSCODER_MAX_JOBS: 2
+              TRANSCODER_CACHE_BYTES: "10737418240"
+              # Read-only root: fontconfig (subtitle burn-in) caches here.
+              XDG_CACHE_HOME: /tmp/.cache
+              TRANSCODER_SECRET:
+                valueFrom:
+                  secretKeyRef:
+                    name: aiostreams-transcoder-secret
+                    key: PARTY_TRANSCODER_SECRET
+            probes:
+              # /health needs the shared secret, so check the port instead.
+              liveness: &transcoderProbes
+                enabled: true
+                custom: true
+                spec:
+                  tcpSocket:
+                    port: *transcoderPort
+                  initialDelaySeconds: 5
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+              readiness: *transcoderProbes
+            resources:
+              requests:
+                cpu: 50m
+                memory: 128Mi
+              limits:
+                memory: 4Gi
+                nvidia.com/gpu: 1
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -77,23 +136,54 @@ spec:
         fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
     service:
+      # Names are pinned: with two services the chart would otherwise suffix
+      # them, and PARTY_INTERNAL_URL / PARTY_TRANSCODER_URL rely on these.
       app:
+        forceRename: aiostreams
         controller: aiostreams
         ports:
           http:
             port: *port
+      # Cluster-internal only: no route points at it.
+      transcoder:
+        forceRename: aiostreams-transcoder
+        controller: transcoder
+        ports:
+          http:
+            port: *transcoderPort
     route:
       app:
         hostnames: ["aiostreams.${SECRET_DOMAIN}"]
         parentRefs:
           - name: envoy-external
             namespace: network
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: http
     persistence:
       config:
         existingClaim: aiostreams-data
-        globalMounts:
-          - path: /app/data
+        advancedMounts:
+          aiostreams:
+            app:
+              - path: /app/data
       cache:
         type: emptyDir
-        globalMounts:
-          - path: /home/node/.cache
+        advancedMounts:
+          aiostreams:
+            app:
+              - path: /home/node/.cache
+      transcodes:
+        type: emptyDir
+        sizeLimit: 12Gi
+        advancedMounts:
+          transcoder:
+            app:
+              - path: /cache
+      transcoder-tmp:
+        type: emptyDir
+        advancedMounts:
+          transcoder:
+            app:
+              - path: /tmp

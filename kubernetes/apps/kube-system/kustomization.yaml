@@ -13,3 +13,4 @@ resources:
   - ./metrics-server/ks.yaml
   - ./reloader/ks.yaml
   - ./nvidia/config.yaml
+  - ./nvidia-device-plugin/ks.yaml

@@ -1,0 +1,10 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/helmrepository_v1.json
+# NVIDIA does not publish this chart to an OCI registry.
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: nvidia-device-plugin
+spec:
+  interval: 2h
+  url: https://nvidia.github.io/k8s-device-plugin
