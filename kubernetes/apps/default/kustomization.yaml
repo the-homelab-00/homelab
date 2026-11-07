@@ -12,6 +12,7 @@ resources:
   - ./home-assistant/ks.yaml
   - ./zigbee2mqtt/ks.yaml
   - ./aiostreams/ks.yaml
+  - ./aiostreams-transcoder/ks.yaml
   - ./aiometadata/ks.yaml
   - ./openclaw/ks.yaml
   - ./click-log/ks.yaml
