@@ -30,6 +30,15 @@
   },
   packageRules: [
     {
+      description: "AIOStreams fork images: pinned by hand",
+      matchDatasources: ["docker"],
+      matchPackageNames: [
+        "ghcr.io/thepotato97/aiostreams",
+        "ghcr.io/thepotato97/aiostreams-transcoder",
+      ],
+      enabled: false,
+    },
+    {
       description: "Override Helmfile Dependency Name",
       matchDatasources: ["docker"],
       matchManagers: ["helmfile"],
