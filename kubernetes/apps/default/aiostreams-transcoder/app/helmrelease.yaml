@@ -1,0 +1,91 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+# FFmpeg companion for aiostreams guest watch parties. Cluster-internal only:
+# aiostreams reaches it at http://aiostreams-transcoder:3100.
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: aiostreams-transcoder
+spec:
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: aiostreams-transcoder
+  values:
+    controllers:
+      transcoder:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        pod:
+          # NVENC through the Talos NVIDIA container runtime.
+          runtimeClassName: nvidia
+        containers:
+          app:
+            image:
+              repository: ghcr.io/thepotato97/aiostreams-transcoder
+              tag: guest-watch-together@sha256:6f612e92904bfe18204e37a48e4bf5ee6ef57e865416721db3c1a48eead2bb25
+            env:
+              PORT: &transcoderPort 3100
+              AIOSTREAMS_INTERNAL_URL: http://aiostreams:3000
+              CACHE_DIR: /cache
+              # Falls back to CPU by itself if NVENC fails to start.
+              TRANSCODER_ENCODER: nvidia
+              NVIDIA_DRIVER_CAPABILITIES: compute,video,utility
+              TRANSCODER_MAX_JOBS: 2
+              TRANSCODER_CACHE_BYTES: "10737418240"
+              # Read-only root: fontconfig (subtitle burn-in) caches here.
+              XDG_CACHE_HOME: /tmp/.cache
+              TRANSCODER_SECRET:
+                valueFrom:
+                  secretKeyRef:
+                    name: aiostreams-transcoder-secret
+                    key: PARTY_TRANSCODER_SECRET
+            probes:
+              # /health needs the shared secret, so check the port instead.
+              liveness: &transcoderProbes
+                enabled: true
+                custom: true
+                spec:
+                  tcpSocket:
+                    port: *transcoderPort
+                  initialDelaySeconds: 5
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+              readiness: *transcoderProbes
+            resources:
+              requests:
+                cpu: 50m
+                memory: 128Mi
+              limits:
+                memory: 4Gi
+                nvidia.com/gpu: 1
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+    service:
+      transcoder:
+        # aiostreams' PARTY_TRANSCODER_URL relies on this name.
+        forceRename: aiostreams-transcoder
+        controller: transcoder
+        ports:
+          http:
+            port: *transcoderPort
+    persistence:
+      transcodes:
+        type: emptyDir
+        sizeLimit: 12Gi
+        globalMounts:
+          - path: /cache
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp

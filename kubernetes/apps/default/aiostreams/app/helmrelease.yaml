@@ -42,15 +42,18 @@ spec:
               BASE_URL: &url "https://aiostreams.${SECRET_DOMAIN}"
               BUILTIN_STREMTHRU_URL: *url
               # Guest watch parties: browser guests, with FFmpeg in the
-              # transcoder controller below. Both URLs stay inside the cluster.
+              # aiostreams-transcoder app. Both URLs stay inside the cluster.
               PARTY_GUEST_STREAMING: "true"
               PARTY_TRANSCODER_URL: http://aiostreams-transcoder:3100
               PARTY_INTERNAL_URL: http://aiostreams:3000
             envFrom: &envFrom
               - secretRef:
                   name: aiostreams-secret
+              # Optional, so aiostreams still starts if the generated key is
+              # missing; guest streaming just stays off until it exists.
               - secretRef:
                   name: aiostreams-transcoder-secret
+                  optional: true
             probes:
               liveness: &probes
                 enabled: true
@@ -77,57 +80,6 @@ spec:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
-      transcoder:
-        annotations:
-          reloader.stakater.com/auto: "true"
-        pod:
-          # NVENC through the Talos NVIDIA container runtime.
-          runtimeClassName: nvidia
-        containers:
-          app:
-            image:
-              repository: ghcr.io/thepotato97/aiostreams-transcoder
-              tag: guest-watch-together@sha256:6f612e92904bfe18204e37a48e4bf5ee6ef57e865416721db3c1a48eead2bb25
-            env:
-              PORT: &transcoderPort 3100
-              AIOSTREAMS_INTERNAL_URL: http://aiostreams:3000
-              CACHE_DIR: /cache
-              # Falls back to CPU by itself if NVENC fails to start.
-              TRANSCODER_ENCODER: nvidia
-              NVIDIA_DRIVER_CAPABILITIES: compute,video,utility
-              TRANSCODER_MAX_JOBS: 2
-              TRANSCODER_CACHE_BYTES: "10737418240"
-              # Read-only root: fontconfig (subtitle burn-in) caches here.
-              XDG_CACHE_HOME: /tmp/.cache
-              TRANSCODER_SECRET:
-                valueFrom:
-                  secretKeyRef:
-                    name: aiostreams-transcoder-secret
-                    key: PARTY_TRANSCODER_SECRET
-            probes:
-              # /health needs the shared secret, so check the port instead.
-              liveness: &transcoderProbes
-                enabled: true
-                custom: true
-                spec:
-                  tcpSocket:
-                    port: *transcoderPort
-                  initialDelaySeconds: 5
-                  periodSeconds: 10
-                  timeoutSeconds: 5
-                  failureThreshold: 3
-              readiness: *transcoderProbes
-            resources:
-              requests:
-                cpu: 50m
-                memory: 128Mi
-              limits:
-                memory: 4Gi
-                nvidia.com/gpu: 1
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -136,21 +88,13 @@ spec:
         fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
     service:
-      # Names are pinned: with two services the chart would otherwise suffix
-      # them, and PARTY_INTERNAL_URL / PARTY_TRANSCODER_URL rely on these.
+      # The transcoder reaches aiostreams by this name (PARTY_INTERNAL_URL).
       app:
         forceRename: aiostreams
         controller: aiostreams
         ports:
           http:
             port: *port
-      # Cluster-internal only: no route points at it.
-      transcoder:
-        forceRename: aiostreams-transcoder
-        controller: transcoder
-        ports:
-          http:
-            port: *transcoderPort
     route:
       app:
         hostnames: ["aiostreams.${SECRET_DOMAIN}"]
@@ -174,16 +118,3 @@ spec:
           aiostreams:
             app:
               - path: /home/node/.cache
-      transcodes:
-        type: emptyDir
-        sizeLimit: 12Gi
-        advancedMounts:
-          transcoder:
-            app:
-              - path: /cache
-      transcoder-tmp:
-        type: emptyDir
-        advancedMounts:
-          transcoder:
-            app:
-              - path: /tmp
