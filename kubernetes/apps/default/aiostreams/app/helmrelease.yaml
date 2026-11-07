@@ -27,7 +27,7 @@ spec:
             image:
               # Fork with guest watch parties (ThePotato97/AIOStreams, feat/guest-watch-together)
               repository: ghcr.io/thepotato97/aiostreams
-              tag: guest-watch-together@sha256:98d06bc40b641db9b1aaeda30a6478ec887e9c3d5165629ac3ba690c9de60a94
+              tag: guest-watch-together@sha256:8a674af7452321f7610adfae2f9b79bc384bc238b392e20bb136cfa54b18dd51
             env:
               TEMPLATE_URLS: '["https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/Tamtaro-All-Templates-for-AIOStreams.json", "https://raw.githubusercontent.com/Vidhin05/Releases-Regex/refs/heads/main/all-templates.json"]'
               TEMPLATE_REFRESH_INTERVAL: 3600
@@ -87,7 +87,7 @@ spec:
           app:
             image:
               repository: ghcr.io/thepotato97/aiostreams-transcoder
-              tag: guest-watch-together@sha256:ff828f13cd555fb5c69fcdfada7ba0e4ceefad269fd2e91ffd08aa46caec703a
+              tag: guest-watch-together@sha256:6f612e92904bfe18204e37a48e4bf5ee6ef57e865416721db3c1a48eead2bb25
             env:
               PORT: &transcoderPort 3100
               AIOSTREAMS_INTERNAL_URL: http://aiostreams:3000
