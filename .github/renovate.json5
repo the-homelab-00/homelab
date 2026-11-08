@@ -21,6 +21,19 @@
     'github>the-homelab-00/homelab//.github/renovate/semanticCommits.json5',
   ],
   dependencyDashboardTitle: 'Renovate Dashboard 🤖',
+  packageRules: [
+    {
+      // Their guest-watch-together tag moves with every dev build; they're pinned through PRs,
+      // as a new digest rolled out by itself replaces the transcoder mid-conversion.
+      description: 'AIOStreams fork images: pinned by hand',
+      matchDatasources: ['docker'],
+      matchPackageNames: [
+        'ghcr.io/thepotato97/aiostreams',
+        'ghcr.io/thepotato97/aiostreams-transcoder',
+      ],
+      enabled: false,
+    },
+  ],
   suppressNotifications: [
     'prEditedNotification',
     'prIgnoreNotification',
