@@ -23,7 +23,7 @@ spec:
           app:
             image:
               repository: ghcr.io/thepotato97/aiostreams-transcoder
-              tag: guest-watch-together@sha256:cf93ac1a795b0b040f77d084a536d91a1e17fd0dc037fa5b7d3d4e7cf8908cba
+              tag: guest-watch-together@sha256:99f4039aaa4d5a7a511f81fc2caf0ad28c5fc465aa69f719dbf137b30ecac778
             env:
               PORT: &transcoderPort 3100
               AIOSTREAMS_INTERNAL_URL: http://aiostreams:3000
