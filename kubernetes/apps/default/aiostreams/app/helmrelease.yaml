@@ -114,6 +114,8 @@ spec:
               - path: /app/data
       cache:
         type: emptyDir
+        # Guest playback keeps the sources it reads here, up to 2 GiB.
+        sizeLimit: 3Gi
         advancedMounts:
           aiostreams:
             app:
