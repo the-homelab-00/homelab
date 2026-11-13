@@ -46,6 +46,9 @@ spec:
               PARTY_GUEST_STREAMING: "true"
               PARTY_TRANSCODER_URL: http://aiostreams-transcoder:3100
               PARTY_INTERNAL_URL: http://aiostreams:3000
+              # Shared store (parties, guest links and sessions) and cache: they
+              # survive an aiostreams restart. Cache entries carry their own TTLs.
+              REDIS_URI: redis://aiostreams-redis:6379
             envFrom: &envFrom
               - secretRef:
                   name: aiostreams-secret
@@ -80,6 +83,48 @@ spec:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
+      redis:
+        containers:
+          app:
+            image:
+              repository: docker.io/library/redis
+              tag: 8.10.3-alpine@sha256:7958cfbb9d152f87dadfbc89f1b0b15938f0b81ff8982feb327476f4911935c3
+            # Appended to disk, so guest links survive a Redis restart too. noeviction: when
+            # full, writes fail rather than dropping guest state; cache entries expire on
+            # their own TTLs.
+            command:
+              - redis-server
+              - --appendonly
+              - "yes"
+              - --save
+              - "3600"
+              - "1"
+              - --maxmemory
+              - 512mb
+              - --maxmemory-policy
+              - noeviction
+            probes:
+              liveness: &redisProbes
+                enabled: true
+                custom: true
+                spec:
+                  exec:
+                    command: ["redis-cli", "ping"]
+                  initialDelaySeconds: 10
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 5
+              readiness: *redisProbes
+            resources:
+              requests:
+                cpu: 10m
+                memory: 64Mi
+              limits:
+                memory: 768Mi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -95,6 +140,11 @@ spec:
         ports:
           http:
             port: *port
+      redis:
+        controller: redis
+        ports:
+          redis:
+            port: 6379
     route:
       app:
         hostnames: ["aiostreams.${SECRET_DOMAIN}"]
@@ -118,3 +168,9 @@ spec:
           aiostreams:
             app:
               - path: /home/node/.cache
+      redis:
+        existingClaim: aiostreams-redis
+        advancedMounts:
+          redis:
+            app:
+              - path: /data
