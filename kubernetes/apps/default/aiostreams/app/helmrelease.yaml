@@ -27,7 +27,7 @@ spec:
             image:
               # Fork with guest watch parties (ThePotato97/AIOStreams, feat/guest-watch-together)
               repository: ghcr.io/thepotato97/aiostreams
-              tag: guest-watch-together@sha256:1261e348134f97dd5af15646c114165199867a902aa1c57624aa1a3a76e65a56
+              tag: guest-watch-together@sha256:4e3c59863928f33df321ff9084101ccf914653cc1e347a488b83f48e3f7a3015
             env:
               TEMPLATE_URLS: '["https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/Tamtaro-All-Templates-for-AIOStreams.json", "https://raw.githubusercontent.com/Vidhin05/Releases-Regex/refs/heads/main/all-templates.json"]'
               TEMPLATE_REFRESH_INTERVAL: 3600
@@ -114,6 +114,8 @@ spec:
               - path: /app/data
       cache:
         type: emptyDir
+        # Guest playback keeps the sources it reads here, up to 2 GiB.
+        sizeLimit: 3Gi
         advancedMounts:
           aiostreams:
             app:
