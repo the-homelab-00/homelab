@@ -62,7 +62,7 @@ spec:
           clickhouse:
             image:
               repository: clickhouse/clickhouse-server
-              tag: 26.11.2.4@sha256:7175c09031a599d17b43046abe3c79a70bd4263f77e4a8991286b4fc4886b1b0
+              tag: 26.11.3.10@sha256:88ddb6e4ee3c73760ed8ea30777d6f993eaa3f9e8062e3605a69f84ed0717258
             # straight to the server: the image's entrypoint writes user config into /etc
             command: ["/usr/bin/clickhouse", "server", "--config-file=/etc/clickhouse-server/config.xml"]
             probes:
